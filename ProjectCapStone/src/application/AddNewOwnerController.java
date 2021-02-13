@@ -1,12 +1,16 @@
 package application;
 
+
 import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.scene.Node;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+
 import javafx.scene.control.TextField;
 
 public class AddNewOwnerController {
@@ -17,7 +21,11 @@ public class AddNewOwnerController {
 	@FXML private TextField textField_icNumber;
 	@FXML private TextField textField_address;
 	
+
+	
 	public AddNewOwnerModel model = new AddNewOwnerModel();
+	
+
 	
 	public void saveOwnerInfo(ActionEvent event) {
 		String firstName = textField_firstName.getText();
@@ -31,13 +39,17 @@ public class AddNewOwnerController {
 			
 			if(model.addOwnerInfo(firstName, lastName, pNumber, pNumber, address))
 			{
-
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Program says");
 				alert.setHeaderText("Owner info is saved.");
 				alert.show();
 				
 				((Node)event.getSource()).getScene().getWindow().hide();
+				
+
+				
+				
 				
 			}
 			else {
@@ -56,5 +68,13 @@ public class AddNewOwnerController {
 		
 		
 	}
+	
+	public void cancel(ActionEvent event) {
+		
+		((Node)event.getSource()).getScene().getWindow().hide();
+		
+	}
+
+	
 
 }

@@ -10,15 +10,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
 	@FXML private Label label_welcomeUser;
-
+	
+	@FXML private TabPane tabpane;
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
+	
 		
 	}
 	
@@ -67,6 +72,12 @@ public class HomeController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void searchOwner(ActionEvent event) {
+		
+		tabpane.getSelectionModel().select(1);
 		
 	}
 

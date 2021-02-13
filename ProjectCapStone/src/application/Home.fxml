@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <children>
-      <TabPane layoutX="81.0" layoutY="118.0" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="tabpane" layoutX="81.0" layoutY="118.0" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="My Dashboard">
             <content>
@@ -19,7 +19,7 @@
                            <children>
                               <HBox prefHeight="220.0" prefWidth="800.0" spacing="80.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Search Owner">
+                                    <Button mnemonicParsing="false" onAction="#searchOwner" prefHeight="150.0" prefWidth="150.0" text="Search Owner">
                                        <HBox.margin>
                                           <Insets left="100.0" top="40.0" />
                                        </HBox.margin>
@@ -65,7 +65,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Untitled Tab 2">
+          <Tab text="Search Owner">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
