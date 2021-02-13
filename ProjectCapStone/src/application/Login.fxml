@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <children>
+      <Label fx:id="label_sqlStatus" alignment="CENTER" prefHeight="20.0" prefWidth="280.0" text="SQL Status :" textAlignment="RIGHT" wrapText="true" />
+      <TextField fx:id="textField_userName" promptText="UserName">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </TextField>
+      <PasswordField fx:id="textField_password" promptText="Password" />
+      <Button mnemonicParsing="false" onAction="#login" prefWidth="280.0" text="LOGIN" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
