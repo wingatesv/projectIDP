@@ -24,7 +24,7 @@
                                           <Insets left="100.0" top="40.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" text="Add New Owner">
+                                    <Button mnemonicParsing="false" onAction="#addNewOwner" prefHeight="150.0" prefWidth="150.0" text="Add New Owner">
                                        <HBox.margin>
                                           <Insets top="40.0" />
                                        </HBox.margin>
