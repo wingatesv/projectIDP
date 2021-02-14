@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainInterfaceController">
    <children>
       <TabPane fx:id="tabpane" layoutX="81.0" layoutY="118.0" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -19,12 +19,12 @@
                            <children>
                               <HBox prefHeight="220.0" prefWidth="800.0" spacing="80.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#searchOwner" prefHeight="150.0" prefWidth="150.0" text="Search Owner">
+                                    <Button mnemonicParsing="false" onAction="#petOwner" prefHeight="150.0" prefWidth="150.0" text="Pet Owner">
                                        <HBox.margin>
                                           <Insets left="100.0" top="40.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#addNewOwner" prefHeight="150.0" prefWidth="150.0" text="Add New Owner">
+                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
                                        <HBox.margin>
                                           <Insets top="40.0" />
                                        </HBox.margin>
@@ -65,9 +65,29 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Search Owner">
+          <Tab text="Pet Owner">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="label_ownerName" layoutX="25.0" layoutY="38.0" text="First Name :" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="38.0" />
+                        <Label fx:id="label_ownerIC" layoutX="26.0" layoutY="100.0" text="IC No :" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="100.0" />
+                        <Label fx:id="label_ownerTelephone" layoutX="300.0" layoutY="38.0" text="Telephone No. :" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="38.0" />
+                        <Label fx:id="label_ownerAddress" layoutX="348.0" layoutY="110.0" text="Address :" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="100.0" />
+                        <Separator layoutX="14.0" layoutY="177.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0" />
+                        <Label layoutX="20.0" layoutY="177.0" text="Pets List" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="180.0" />
+                        <ListView layoutX="20.0" layoutY="212.0" prefHeight="200.0" prefWidth="749.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="215.0" />
+                        <Button layoutX="672.0" layoutY="432.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" text="Add Pet" AnchorPane.bottomAnchor="110.0" AnchorPane.rightAnchor="30.0" />
+                        <Button layoutX="574.0" layoutY="430.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" text="Refresh" />
+                        <Label layoutX="25.0" layoutY="72.0" text="Last Name :" />
+                        <TextField fx:id="textField_ownerFirstName" layoutX="107.0" layoutY="33.0" promptText="First Name" />
+                        <TextField fx:id="textField_ownerLastName" layoutX="107.0" layoutY="67.0" promptText="Last Name" />
+                        <TextField fx:id="textField_ownerIcNumber" layoutX="107.0" layoutY="104.0" promptText="Identification Number" />
+                        <TextField fx:id="textField_ownerPhoneNumber" layoutX="400.0" layoutY="33.0" promptText="Telephone Number" />
+                        <TextField fx:id="textField_ownerAddress" layoutX="367.0" layoutY="95.0" prefHeight="27.0" prefWidth="370.0" promptText="Address" />
+                        <Button layoutX="583.0" layoutY="33.0" mnemonicParsing="false" text="Search" />
+                        <Button layoutX="668.0" layoutY="33.0" mnemonicParsing="false" onAction="#saveOwnerInfo" text="Add New Owner" />
+                        <Button layoutX="683.0" layoutY="131.0" mnemonicParsing="false" onAction="#clearInfo" prefHeight="27.0" prefWidth="93.0" text="Clear" />
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>

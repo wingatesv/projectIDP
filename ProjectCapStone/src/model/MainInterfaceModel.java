@@ -1,16 +1,18 @@
-package application;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class AddNewOwnerModel {
+import common.MySqlConnection;
+import common.ReadConfig;
+
+public class MainInterfaceModel {
 	
 Connection connection;
 	
-	public AddNewOwnerModel() {
+	public  MainInterfaceModel() {
 	
-		
 		ReadConfig readConfig = new ReadConfig();
 	
 		connection = MySqlConnection.Connector(readConfig.getUrl(), readConfig.getUser(), readConfig.getPassword());
@@ -61,6 +63,5 @@ Connection connection;
 		}
 	}
 		
-	}
 
-
+}

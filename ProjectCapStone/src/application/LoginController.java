@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.LoginModel;
 
 public class LoginController implements Initializable {
 	
@@ -46,9 +47,9 @@ public class LoginController implements Initializable {
 				
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/application/Home.fxml").openStream());
-				HomeController homeController = (HomeController)loader.getController();
-				homeController.getUser(textField_userName.getText());
+				Pane root = loader.load(getClass().getResource("/fxml/MainInterface.fxml").openStream());
+				MainInterfaceController mainInterfaceController = (MainInterfaceController)loader.getController();
+				mainInterfaceController.getUser(textField_userName.getText());
 			
 				
 				Scene scene = new Scene(root);
