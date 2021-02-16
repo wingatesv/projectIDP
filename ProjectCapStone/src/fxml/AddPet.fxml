@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddPetController">
+   <children>
+      <VBox alignment="CENTER" layoutX="185.0" layoutY="42.0" prefHeight="400.0" prefWidth="500.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Add New Pet" />
+            <TextField fx:id="textField_petName" promptText="Pet Name" />
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="500.0" spacing="20.0">
+               <children>
+                  <Label text="Pet Type :" />
+                  <RadioButton fx:id="radioButton_dog" mnemonicParsing="false" text="Dog">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="petType" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioButton_cat" mnemonicParsing="false" text="Cat" toggleGroup="$petType" />
+                  <RadioButton fx:id="radioButton_other" mnemonicParsing="false" text="Others" toggleGroup="$petType" />
+               </children>
+            </HBox>
+            <TextField fx:id="textField_breed" promptText="Breed" />
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="500.0" spacing="20.0">
+               <children>
+                  <Label text="Gender :" />
+                  <RadioButton fx:id="radioButton_male" mnemonicParsing="false" text="Male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="gender" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioButton_female" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
+               </children>
+            </HBox>
+            <DatePicker fx:id="datePicker_dob" editable="false" prefWidth="270.0" promptText="Date of Birth" />
+            <Button mnemonicParsing="false" onAction="#savePetInfo" text="Save" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

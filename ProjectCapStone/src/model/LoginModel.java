@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.Log;
 import common.MySqlConnection;
 import common.ReadConfig;
 
 public class LoginModel {
+	
 	Connection connection;
+	public Log log = new Log();
 	
 	public LoginModel() {	
 		
@@ -17,6 +20,7 @@ public class LoginModel {
 	
 		connection = MySqlConnection.Connector(readConfig.getUrl(), readConfig.getUser(), readConfig.getPassword());
 		if (connection == null) {
+			log.logFile(null, "severe", "SQL connection is NULL.");
 			System.exit(1);
 			
 		}
@@ -26,6 +30,7 @@ public class LoginModel {
 		try {
 			return !connection.isClosed();
 		} catch (SQLException e) {
+			log.logFile(e, "severe", e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -53,6 +58,7 @@ public class LoginModel {
 			}
 			
 		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
