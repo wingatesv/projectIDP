@@ -1,16 +1,17 @@
-package application;
+package common;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Pet {
 	
-	public Pet(String petName, String petType, String breed, String gender, String dob){
+	public Pet(String petName, String petType, String breed, String gender, String dob, String neutered){
 	      this.petName = new SimpleStringProperty(petName);
 	      this.petType = new SimpleStringProperty(petType);
 	     this.breed = new SimpleStringProperty(breed);
 	     this.gender = new SimpleStringProperty(gender);
 	     this.dob = new SimpleStringProperty(dob);
+	     this.neutered = new SimpleStringProperty(neutered);
 	  }
 
 	  private StringProperty petName;
@@ -47,6 +48,13 @@ public class Pet {
 	  public String getDob() { return dobProperty().get(); }
 	  public StringProperty dobProperty() {
 	    return dob;
+	  }
+	  
+	  private StringProperty neutered;
+	  public void setNeutered(String value) { neuteredProperty().set(value); }
+	  public String getNeutered() { return neuteredProperty().get(); }
+	  public StringProperty neuteredProperty() {
+	    return neutered;
 	  }
 
 }
