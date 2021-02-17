@@ -34,6 +34,17 @@
                   <RadioButton fx:id="radioButton_female" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="500.0" spacing="20.0">
+               <children>
+                  <Label text="Neutered :" />
+                  <RadioButton fx:id="radioButton_neuteredYes" mnemonicParsing="false" text="Yes">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="neutered" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="radioButton_neuteredNo" mnemonicParsing="false" text="No" toggleGroup="$neutered" />
+               </children>
+            </HBox>
             <DatePicker fx:id="datePicker_dob" editable="false" prefWidth="270.0" promptText="Date of Birth" />
             <Button mnemonicParsing="false" onAction="#savePetInfo" text="Save" />
          </children>

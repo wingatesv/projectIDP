@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import common.Log;
 import common.MySqlConnection;
 import common.ReadConfig;
 
 public class AddPetModel {
 	
 Connection connection;
+public Log log = new Log();
 	
 	public AddPetModel() {
 	
@@ -17,15 +19,16 @@ Connection connection;
 	
 		connection = MySqlConnection.Connector(readConfig.getUrl(), readConfig.getUser(), readConfig.getPassword());
 		if (connection == null) {
+			log.logFile(null, "severe", "SQL connection is NULL.");
 			System.exit(1);
 			
 		}
 	}
 	
-public boolean addPetInfo(Integer ownerID, String petName, String petType ,String breed, String gender, String dob) throws SQLException {
+public boolean addPetInfo(Integer ownerID, String petName, String petType ,String breed, String gender, String dob, String neutered) throws SQLException {
 		
 		PreparedStatement preparedStatement = null;
-		String query = "INSERT into pets (OwnerID, PetName, PetType, Breed, Gender, DOB) values (?, ?, ?, ?, ?, ?)";
+		String query = "INSERT into pets (OwnerID, PetName, PetType, Breed, Gender, DOB, Neutered) values (?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 				preparedStatement = connection.prepareStatement(query);
@@ -35,6 +38,7 @@ public boolean addPetInfo(Integer ownerID, String petName, String petType ,Strin
 				preparedStatement.setString(4, breed);
 				preparedStatement.setString(5, gender);
 				preparedStatement.setString(6, dob);
+				preparedStatement.setString(7, neutered);
 				
 				
 			if (preparedStatement.executeUpdate() == 1) {		
@@ -51,6 +55,7 @@ public boolean addPetInfo(Integer ownerID, String petName, String petType ,Strin
 		
 			
 		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
 			e.printStackTrace();
 			return false;
 			

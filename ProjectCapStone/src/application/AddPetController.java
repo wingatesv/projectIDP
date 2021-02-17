@@ -3,6 +3,7 @@ package application;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import common.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -23,8 +24,12 @@ public class AddPetController {
 	@FXML private RadioButton radioButton_other;
 	@FXML private RadioButton radioButton_male;
 	@FXML private RadioButton radioButton_female;
+	@FXML private RadioButton radioButton_neuteredYes;
+	@FXML private RadioButton radioButton_neuteredNo;
 	
 	@FXML private DatePicker datePicker_dob;
+	
+	public Log log = new Log();
 
 	
 	private Integer ownerID;	
@@ -43,37 +48,52 @@ public class AddPetController {
 		String petType = "";
 		String gender = "";
 		String dob = "";
-		
-		if (radioButton_dog.isSelected()) {
-			petType = radioButton_dog.getText();
-		}
-		
-		if (radioButton_cat.isSelected()) {
-			petType = radioButton_cat.getText();
-		}
-		
-		if (radioButton_other.isSelected()) {
-			petType = radioButton_other.getText();
-		}
-		
-		if (radioButton_male.isSelected()) {
-			gender = radioButton_male.getText();
-		}
-		
-		if (radioButton_female.isSelected()) {
-			gender = radioButton_female.getText();
-		}
-		
-		LocalDate lDate = datePicker_dob.getValue();
-		dob = 	lDate.toString();
-	
-		
-	
+		String neutered = "";
 		
 		try {
 			
+				if (radioButton_dog.isSelected()) {
+					petType = radioButton_dog.getText();
+				}
+				
+				if (radioButton_cat.isSelected()) {
+					petType = radioButton_cat.getText();
+				}
+				
+				if (radioButton_other.isSelected()) {
+					petType = radioButton_other.getText();
+				}
+				
+				if (radioButton_male.isSelected()) {
+					gender = radioButton_male.getText();
+				}
+				
+				if (radioButton_female.isSelected()) {
+					gender = radioButton_female.getText();
+				}
+				
+				if (radioButton_neuteredYes.isSelected()) {
+					neutered = radioButton_neuteredYes.getText();
+				}
+				
+				if (radioButton_neuteredNo.isSelected()) {
+					neutered = radioButton_neuteredNo.getText();
+				}
+				
+				LocalDate lDate = datePicker_dob.getValue();
+				
+				if (lDate == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Pet info is incomplete.");
+					alert.show();
+					return;
+				}
+				dob = lDate.toString();
+		
 			
-			if (petName.isEmpty() || breed.isEmpty()) {
+			
+			if (petName.isEmpty() || breed.isEmpty() || petType.isEmpty() || gender.isEmpty() || neutered.isEmpty()) {
 				
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Program says");
@@ -83,9 +103,11 @@ public class AddPetController {
 				
 			}
 			
-			if (model.addPetInfo(ownerID, petName, petType, breed, gender, dob)) {
+			if (model.addPetInfo(ownerID, petName, petType, breed, gender, dob, neutered)) {
 				
 				((Node)event.getSource()).getScene().getWindow().hide();
+				
+				log.logFile(null, "info", petName + " the " + petType + " is registered into database.");
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Program says");
@@ -102,7 +124,7 @@ public class AddPetController {
 				alert.show();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			log.logFile(e, "severe", e.getMessage());
 			e.printStackTrace();
 		}
 		
