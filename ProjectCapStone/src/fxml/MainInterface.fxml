@@ -102,9 +102,9 @@
                         <TextField fx:id="textField_ownerIcNumber" layoutX="107.0" layoutY="104.0" promptText="Identification Number" />
                         <TextField fx:id="textField_ownerPhoneNumber" layoutX="400.0" layoutY="33.0" promptText="Telephone Number" />
                         <TextField fx:id="textField_ownerAddress" layoutX="367.0" layoutY="95.0" prefHeight="27.0" prefWidth="370.0" promptText="Address" />
-                        <Button layoutX="583.0" layoutY="33.0" mnemonicParsing="false" text="Search" />
+                        <Button layoutX="583.0" layoutY="33.0" mnemonicParsing="false" onAction="#searchOwner" text="Search" />
                         <Button layoutX="668.0" layoutY="33.0" mnemonicParsing="false" onAction="#saveOwnerInfo" text="Add New Owner" />
-                        <Button layoutX="683.0" layoutY="131.0" mnemonicParsing="false" onAction="#clearInfo" prefHeight="27.0" prefWidth="93.0" text="Clear" />
+                        <Button layoutX="552.0" layoutY="131.0" mnemonicParsing="false" onAction="#clearInfo" prefHeight="27.0" prefWidth="93.0" text="Clear" />
                         <TableView fx:id="petTable" layoutX="32.0" layoutY="206.0" onContextMenuRequested="#goToPetInfo" onMouseClicked="#goToPetInfo" prefHeight="200.0" prefWidth="741.0">
                           <columns>
                             <TableColumn fx:id="petName" prefWidth="75.0" text="PetName" />
@@ -115,6 +115,7 @@
                               <TableColumn fx:id="neutered" prefWidth="75.0" text="Neutered" />
                           </columns>
                         </TableView>
+                        <Button layoutX="679.0" layoutY="131.0" mnemonicParsing="false" onAction="#editOwnerInfo" text="Edit Owner Info" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -127,7 +128,7 @@
                         <Label fx:id="label_petType" layoutX="311.0" layoutY="21.0" text="Pet Type :" />
                         <Label fx:id="label_dob" layoutX="311.0" layoutY="62.0" text="DOB :" />
                         <Label fx:id="label_gender" layoutX="32.0" layoutY="104.0" text="Gender :" />
-                        <Button layoutX="584.0" layoutY="16.0" mnemonicParsing="false" text="Edit Info" />
+                        <Button layoutX="584.0" layoutY="16.0" mnemonicParsing="false" onAction="#editPetInfo" text="Edit Info" />
                         <Button layoutX="695.0" layoutY="16.0" mnemonicParsing="false" text="Delete Info" />
                         <Separator layoutX="23.0" layoutY="146.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <TabPane layoutX="20.0" layoutY="149.0" prefHeight="273.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">

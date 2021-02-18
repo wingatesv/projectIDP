@@ -2,11 +2,14 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import common.Log;
 import common.MySqlConnection;
 import common.ReadConfig;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AddVacRecordModel {
 	
@@ -65,8 +68,79 @@ public class AddVacRecordModel {
 				
 			}
 		}
+	
+	
+public ObservableList<String> getVaccineDog() throws SQLException {
+		
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "SELECT * FROM vaccine_dog";
+		  ObservableList<String> vaccineDogs = FXCollections.observableArrayList();
 		
 		
+		try {
+				preparedStatement = connection.prepareStatement(query);
+				resultSet = preparedStatement.executeQuery();
+				
+				
+				while (resultSet.next()) {
+					
+					vaccineDogs.add(resultSet.getString("VaccineName"));
+					
+				}		
+		
+	} catch (Exception e) {
+		log.logFile(e, "severe", e.getMessage());
+		e.printStackTrace();
+		
+	}
+	
+	finally {
+		preparedStatement.close();
+		resultSet.close();
+	}
+		
+		return vaccineDogs;
+		
+		
+	}
+
+public ObservableList<String> getVaccineCat() throws SQLException {
+	
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	String query = "SELECT * FROM vaccine_cat";
+	  ObservableList<String> vaccineCats = FXCollections.observableArrayList();
+	
+	
+	try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				vaccineCats.add(resultSet.getString("VaccineName"));
+				
+			}
+	
+	
+	} catch (Exception e) {
+		log.logFile(e, "severe", e.getMessage());
+		e.printStackTrace();
+		
+	}
+	
+	finally {
+		preparedStatement.close();
+		resultSet.close();
+	}
+		
+		return vaccineCats;
+		
+		
+	}
+			
+			
 		
 
 }
