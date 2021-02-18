@@ -3,9 +3,9 @@ package common;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Vaccine {
+public class VaccineRecord {
 	
-	public Vaccine(String vaccineID, String vaccineType, String injection, String date, String nextDate){
+	public VaccineRecord(String vaccineID, String vaccineType, String injection, String date, String nextDate){
 	      this.vaccineID = new SimpleStringProperty(vaccineID);
 	      this.vaccineType = new SimpleStringProperty(vaccineType);
 	     this.injection = new SimpleStringProperty(injection);

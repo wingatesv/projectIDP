@@ -4,9 +4,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import common.Log;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,10 +26,6 @@ public class AddVacRecordController implements Initializable {
 	@FXML private RadioButton radioButton_3rd;
 	@FXML private ComboBox<String> comboBox_vacType;
 	
-	ObservableList<String> dogVac = FXCollections.observableArrayList("7 in 1", "8 in 1", "9 in 1", "10 in 1", "Rabies");
-	ObservableList<String> catVac = FXCollections.observableArrayList("4 in 1", "5 in 1", "FIP", "Feline X", "Rabies");
-	
-	
 	
 	private String petType;
 	private Integer petID;
@@ -51,16 +45,24 @@ public class AddVacRecordController implements Initializable {
 		
 	}
 	
-	public void setPetType(String petType) {
+	public void setPetType(String petType) throws SQLException {
 		this.petType = petType;
 		
 		
 		if (this.petType.matches("Dog")) {
-			comboBox_vacType.setItems(dogVac);
+			
+			ObservableList<String> list = model.getVaccineDog();
+			if (!list.isEmpty()) {
+				comboBox_vacType.setItems(list);
+			}
+			
 		}
 		
 		else if (this.petType.matches("Cat")) {
-			comboBox_vacType.setItems(catVac);
+			ObservableList<String> list = model.getVaccineCat();
+			if (!list.isEmpty()) {
+				comboBox_vacType.setItems(list);
+			}
 		}
 	}
 	

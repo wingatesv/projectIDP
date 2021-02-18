@@ -1,11 +1,10 @@
 **************************** CONFIGURATION for CAPSTONE *******************************
 ***************************************************************************************
-SQL Url :jdbc:mysql://localhost:3306/telemedicine_project
+SQL Url :jdbc:mysql://localhost:3306/db_idp?autoReconnect=true&useSSL=false
 SQL Username :root
-SQL Password :
+SQL Password :wingates990620
 
 
 
 
 ********************************* ALL RIGHT RESERVED *********************************
-jdbc:mysql://localhost:3306/telemedicine_project

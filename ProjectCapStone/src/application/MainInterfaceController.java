@@ -3,12 +3,13 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import common.Log;
 import common.Owner;
 import common.Pet;
-import common.Vaccine;
+import common.VaccineRecord;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -64,12 +66,12 @@ public class MainInterfaceController implements Initializable {
 	@FXML private Label label_neutered;
 	
 	// Table View for Vaccination Record
-	@FXML private TableView<Vaccine> vacRecordTable;
-	@FXML private TableColumn<Vaccine, String> vacID;
-	@FXML private TableColumn<Vaccine, String> injection;
-	@FXML private TableColumn<Vaccine, String> vaccineType;
-	@FXML private TableColumn<Vaccine, String> date;
-	@FXML private TableColumn<Vaccine, String> nextDate;
+	@FXML private TableView<VaccineRecord> vacRecordTable;
+	@FXML private TableColumn<VaccineRecord, String> vacID;
+	@FXML private TableColumn<VaccineRecord, String> injection;
+	@FXML private TableColumn<VaccineRecord, String> vaccineType;
+	@FXML private TableColumn<VaccineRecord, String> date;
+	@FXML private TableColumn<VaccineRecord, String> nextDate;
 	
 	
 	// Main Interface Model
@@ -144,10 +146,10 @@ public class MainInterfaceController implements Initializable {
 	
 	public void saveOwnerInfo(ActionEvent event) {
 		
-		String firstName = textField_ownerFirstName.getText();
-		String lastName = textField_ownerLastName.getText();
-		String pNumber = textField_ownerPhoneNumber.getText();
-		String icNumber = textField_ownerIcNumber.getText();
+		String firstName = textField_ownerFirstName.getText().trim();
+		String lastName = textField_ownerLastName.getText().trim();
+		String pNumber = textField_ownerPhoneNumber.getText().trim();
+		String icNumber = textField_ownerIcNumber.getText().trim();
 		String address = textField_ownerAddress.getText();
 		
 		
@@ -165,7 +167,7 @@ public class MainInterfaceController implements Initializable {
 			}
 			
 			
-			if(model.addOwnerInfo(firstName, lastName, pNumber, icNumber, address))
+			if(model.addOwnerInfo(firstName, lastName, icNumber, pNumber, address))
 			{
 				
 
@@ -200,22 +202,103 @@ public class MainInterfaceController implements Initializable {
 	// Search for owner name based on Name
 	
 	public void searchOwner(ActionEvent event) {
-		String firstName = textField_ownerFirstName.getText();
-		String lastName = textField_ownerLastName.getText();
-		
+		String firstName = textField_ownerFirstName.getText().trim();
+		String lastName = textField_ownerLastName.getText().trim();
+	
 		try {
-			/*
+			
+			if (firstName.isEmpty() || lastName.isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Please key in First Name and Last Name");
+				alert.show();
+				return;
+			}
+			
 			ObservableList<Owner> owners = model.searchOwner(firstName, lastName);
+			if (owners.isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Owner not found");
+				alert.show();
+				textField_ownerFirstName.clear();
+				textField_ownerLastName.clear();
+				return;
+			}
 			
 			textField_ownerIcNumber.setText(owners.get(0).getICnumber());
 			textField_ownerPhoneNumber.setText(owners.get(0).getTelephoneNumber());
 			textField_ownerAddress.setText(owners.get(0).getAddress());
-			*/
+			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
 		}
 		
+	}
+	
+	// Edit Owner info based on IC Number -> Owner ID
+	
+	public void editOwnerInfo(ActionEvent event) {
+		
+		 Alert alertConfirm = new Alert(AlertType.CONFIRMATION);
+		 alertConfirm.setTitle("Program says");
+		 alertConfirm.setHeaderText("IC Number should not be edited.");
+		 alertConfirm.setContentText("Are you ok with this?");
+
+         Optional<ButtonType> result = alertConfirm.showAndWait();
+         if (result.get() == ButtonType.OK){
+           
+        	String firstName = textField_ownerFirstName.getText().trim();
+     		String lastName = textField_ownerLastName.getText().trim();
+     		String pNumber = textField_ownerPhoneNumber.getText().trim();
+     		String icNumber = textField_ownerIcNumber.getText().trim();
+     		String address = textField_ownerAddress.getText();
+     		
+     		try {
+
+     			if (firstName.isEmpty() || lastName.isEmpty() || pNumber.isEmpty() || icNumber.isEmpty() || address.isEmpty()) {
+     				Alert alert = new Alert(AlertType.ERROR);
+     				alert.setTitle("Program says");
+     				alert.setHeaderText("Owner info is incomplete.");
+     				alert.show();
+     				return;
+     			}
+     			
+     			Integer OwnerID = model.getOwnerID(icNumber);
+				
+				if (OwnerID == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("IC Number is changed.");
+					alert.show();
+					petTable.setItems(null);
+					return;
+				}
+				
+				if (model.editOwnerInfo(firstName, lastName, pNumber, address, OwnerID)) {
+					
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Owner info is edited.");
+					alert.show();
+					log.logFile(null, "info", firstName + " " + lastName + " is edited.");
+				}
+				else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Owner info is not edited.");
+					alert.show();
+				}
+    	
+     		} catch (Exception e) {
+     			log.logFile(e, "severe", e.getMessage());
+     			e.printStackTrace();
+     		}
+     	 
+        	 
+         }
 	}
 	
 	// Clear all text field in Pet Owner tab
@@ -231,7 +314,7 @@ public class MainInterfaceController implements Initializable {
 	
 	public void refreshPetTable(ActionEvent event) {
 		
-		String icNumber = textField_ownerIcNumber.getText();
+		String icNumber = textField_ownerIcNumber.getText().trim();
 	
 		
 		try {	
@@ -314,9 +397,10 @@ public class MainInterfaceController implements Initializable {
 			
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/fxml/AddPet.fxml").openStream());
-				AddPetController addPetController = (AddPetController)loader.getController();
-				addPetController.setOwnerID(ownerID);
+				Pane root = loader.load(getClass().getResource("/fxml/AddEditPet.fxml").openStream());
+				AddEditPetController addEditPetController = (AddEditPetController)loader.getController();
+				addEditPetController.setOwnerID(ownerID);
+				addEditPetController.setMode("ADD");
 			
 				
 				Scene scene = new Scene(root);
@@ -345,9 +429,9 @@ public class MainInterfaceController implements Initializable {
 			{
 				String petName = "";
 				String petType = "";
-				String dob = "";
 			
-				String icNumber = textField_ownerIcNumber.getText();
+			
+				String icNumber = textField_ownerIcNumber.getText().trim();
 				
 				if (icNumber.isEmpty()) {
 					Alert alert = new Alert(AlertType.ERROR);
@@ -357,9 +441,9 @@ public class MainInterfaceController implements Initializable {
 					return;
 				}
 				
-				Integer OwnerID = model.getOwnerID(icNumber);
+				Integer ownerID = model.getOwnerID(icNumber);
 				
-				if (OwnerID == null) {
+				if (ownerID == null) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Program says");
 					alert.setHeaderText("Pet Owner not found in database");
@@ -373,7 +457,7 @@ public class MainInterfaceController implements Initializable {
 					{
 						petName = item.getPetName();
 						petType = item.getPetType();
-						dob = item.getDob();
+						
 						
 					}
 			
@@ -385,7 +469,17 @@ public class MainInterfaceController implements Initializable {
 					   
 					  }
 				 
-				 ObservableList<Pet> petList = model.getPetInfo(OwnerID, petName, petType, dob);
+				 Integer petID = model.getPetID(ownerID, petName, petType);
+					
+					if (petID == null) {
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Program says");
+						alert.setHeaderText("Pet is not registered.");
+						alert.show();
+						return;
+					}
+				 
+				 ObservableList<Pet> petList = model.getPetInfo(petID);
 				 
 				 if (petList.isEmpty()) {
 					 Alert alert = new Alert(AlertType.ERROR);
@@ -421,10 +515,74 @@ public class MainInterfaceController implements Initializable {
 			e.printStackTrace();
 		
 		}
+
 		
-		
+	}
 	
+	public void editPetInfo(ActionEvent event) {
+		if (label_petName.getText().length() < 11 || label_petType.getText().length() < 11 ) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Program says");
+			alert.setHeaderText("Pet Record is empty");
+			alert.show();
+			return;
+		}
 		
+		
+		String petType = label_petType.getText().substring(11);
+		String petName = label_petName.getText().substring(11);
+		String icNumber = textField_ownerIcNumber.getText().trim();
+		
+		if (icNumber.isEmpty()) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Program says");
+			alert.setHeaderText("Pet Owner IC is missing.");
+			alert.show();
+			return;
+		}
+		try {
+			
+				Integer ownerID = model.getOwnerID(icNumber);
+			
+			
+			if (ownerID == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Pet Owner not found in database");
+				alert.show();
+				return;
+			}
+			
+			Integer petID = model.getPetID(ownerID, petName, petType);
+			
+			if (petID == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Pet is not registered.");
+				alert.show();
+				return;
+			}
+			
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/fxml/AddEditPet.fxml").openStream());
+			AddEditPetController addEditPetController = (AddEditPetController)loader.getController();
+			addEditPetController.setOwnerID(ownerID);
+			addEditPetController.setMode("EDIT");
+			addEditPetController.setPetID(petID);
+		
+			
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			
+			
+			
+		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	// Add vaccination Record at Pet Info Tab
@@ -442,7 +600,7 @@ public class MainInterfaceController implements Initializable {
 		
 		String petType = label_petType.getText().substring(11);
 		String petName = label_petName.getText().substring(11);
-		String icNumber = textField_ownerIcNumber.getText();
+		String icNumber = textField_ownerIcNumber.getText().trim();
 		
 		if (icNumber.isEmpty()) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -509,7 +667,7 @@ public class MainInterfaceController implements Initializable {
 		
 		String petType = label_petType.getText().substring(11);
 		String petName = label_petName.getText().substring(11);
-		String icNumber = textField_ownerIcNumber.getText();
+		String icNumber = textField_ownerIcNumber.getText().trim();
 		
 		if (icNumber.isEmpty()) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -545,9 +703,9 @@ public class MainInterfaceController implements Initializable {
 				return;
 			}
 			
-			ObservableList<Vaccine> vaccines = model.getVaccineRecord(petID);
+			ObservableList<VaccineRecord> vaccineRecords = model.getVaccineRecord(petID);
 			
-			if (vaccines.isEmpty()) {
+			if (vaccineRecords.isEmpty()) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Program says");
 				alert.setHeaderText("No Record found.");
@@ -556,13 +714,13 @@ public class MainInterfaceController implements Initializable {
 				return;
 			}
 			
-			vacID.setCellValueFactory(new PropertyValueFactory<Vaccine, String>("vacID"));
-			injection.setCellValueFactory(new PropertyValueFactory<Vaccine, String>("Injection"));
-			vaccineType.setCellValueFactory(new PropertyValueFactory<Vaccine, String>("VaccineType"));
-			date.setCellValueFactory(new PropertyValueFactory<Vaccine, String>("Date"));
-			nextDate.setCellValueFactory(new PropertyValueFactory<Vaccine, String>("NextDate"));
+			vacID.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("vacID"));
+			injection.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("Injection"));
+			vaccineType.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("VaccineType"));
+			date.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("Date"));
+			nextDate.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("NextDate"));
 			
-			vacRecordTable.setItems(vaccines);
+			vacRecordTable.setItems(vaccineRecords);
 			
 			
 			

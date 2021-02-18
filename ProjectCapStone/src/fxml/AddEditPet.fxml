@@ -6,24 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddPetController">
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddEditPetController">
    <children>
       <VBox alignment="CENTER" layoutX="185.0" layoutY="42.0" prefHeight="400.0" prefWidth="500.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Add New Pet" />
+            <Label fx:id="label_petInfo" text="Add New Pet" />
             <TextField fx:id="textField_petName" promptText="Pet Name" />
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="500.0" spacing="20.0">
                <children>
                   <Label text="Pet Type :" />
-                  <RadioButton fx:id="radioButton_dog" mnemonicParsing="false" text="Dog">
+                  <RadioButton fx:id="radioButton_dog" mnemonicParsing="false" onAction="#selectPetTypeRadioButton" text="Dog">
                      <toggleGroup>
                         <ToggleGroup fx:id="petType" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="radioButton_cat" mnemonicParsing="false" text="Cat" toggleGroup="$petType" />
-                  <RadioButton fx:id="radioButton_other" mnemonicParsing="false" text="Others" toggleGroup="$petType" />
+                  <RadioButton fx:id="radioButton_cat" mnemonicParsing="false" onAction="#selectPetTypeRadioButton" text="Cat" toggleGroup="$petType" />
+                  <RadioButton fx:id="radioButton_other" mnemonicParsing="false" onAction="#selectPetTypeRadioButton" text="Others" toggleGroup="$petType" />
                </children>
             </HBox>
-            <TextField fx:id="textField_breed" promptText="Breed" />
+            <ComboBox fx:id="comboBox_breed" editable="true" prefWidth="150.0" promptText="Breed" />
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="500.0" spacing="20.0">
                <children>
                   <Label text="Gender :" />
