@@ -2928,3 +2928,12 @@ INFO: Reminder email is sent
 Feb 21, 2021 5:57:46 PM common.Log logFile
 INFO: Reminder email is sent
 
+Feb 21, 2021 9:36:18 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Feb 21, 2021 9:36:26 PM common.Log logFile
+INFO: Voon log in successfully.
+
+Feb 21, 2021 9:36:35 PM common.Log logFile
+INFO: Reminder email is sent
+

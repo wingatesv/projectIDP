@@ -205,6 +205,74 @@ finally {
 	return email;
 	
 }
+
+public String getCompanyEmail() throws SQLException {
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	String query = "SELECT Email FROM email_credentials";
+	String email = "";
+	
+	try {
+		preparedStatement = connection.prepareStatement(query);
+		
+		resultSet = preparedStatement.executeQuery();
+		
+		while (resultSet.next()) {
+			
+		email = resultSet.getString("Email");
+			
+		}
+
+
+} catch (Exception e) {
+	log.logFile(e, "severe", e.getMessage());
+	e.printStackTrace();
+
+	
+}
+
+finally {
+	preparedStatement.close();
+	resultSet.close();
+}
+	return email;
+	
+}
+
+public String getCompanyEmailPassword() throws SQLException {
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	String query = "SELECT Password FROM email_credentials";
+	String password = "";
+	
+	try {
+		preparedStatement = connection.prepareStatement(query);
+		
+		resultSet = preparedStatement.executeQuery();
+		
+		while (resultSet.next()) {
+			
+			password = resultSet.getString("Password");
+			
+		}
+
+
+} catch (Exception e) {
+	log.logFile(e, "severe", e.getMessage());
+	e.printStackTrace();
+
+	
+}
+
+finally {
+	preparedStatement.close();
+	resultSet.close();
+}
+	return password;
+	
+}
+	
+	
 	
 
 		
