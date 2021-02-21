@@ -2,6 +2,7 @@ package common;
 
 
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -12,11 +13,15 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import model.AppointmentInfoModel;
 public class Mail {
+	
+	public AppointmentInfoModel model = new AppointmentInfoModel();
 	
 	
   
-  public boolean sendMail(String address, String message) {
+  public boolean sendMail(String address, String message) throws SQLException {
 	  
 	  final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 	  
@@ -32,8 +37,8 @@ public class Mail {
 	     props.put("mail.debug", "true");
 	     props.put("mail.store.protocol", "pop3");
 	     props.put("mail.transport.protocol", "smtp");
-	     final String username = "projectidp2021@gmail.com";//
-	     final String password = "xohsy9-cYpmem-myggum";
+	     final String username = model.getCompanyEmail();//
+	     final String password = model.getCompanyEmailPassword();
 	     
 	     try{
 	    	 
@@ -63,8 +68,7 @@ public class Mail {
 	       return false;
 	     }
 }
-
-
-
+  
+ 
   
 }
