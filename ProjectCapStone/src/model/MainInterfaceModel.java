@@ -125,8 +125,7 @@ public Log log = new Log();
 				
 			if (preparedStatement.executeUpdate() == 1) {		
 			
-				return true;
-				
+				return true;	
 				
 			}
 			else {
@@ -313,7 +312,7 @@ public Log log = new Log();
 					
 					while (resultSet.next()) {
 						
-						vaccineRecords.add(new VaccineRecord(String.valueOf(resultSet.getInt("VacID")), resultSet.getString("Vaccine") ,resultSet.getString("Injection"), resultSet.getString("Date"), resultSet.getString("NextDate")));
+						vaccineRecords.add(new VaccineRecord(resultSet.getString("Vaccine") ,resultSet.getString("Injection"), resultSet.getString("Date"), resultSet.getString("NextDate")));
 					}
 					
 				
@@ -328,6 +327,111 @@ public Log log = new Log();
 			}
 
 		    return vaccineRecords;
+	}
+	
+	public boolean deletePetInfo(Integer petID) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query = "DELETE from pets WHERE PetID = ?";
+		
+		try {
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setInt(1, petID);
+				
+				
+			if (preparedStatement.executeUpdate() == 0) {	
+
+				return false;
+				
+				
+			}
+			else {
+				
+				return true;
+			}
+		
+		
+			
+		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+			return false;
+			
+		}
+		
+		finally {
+			preparedStatement.close();
+			
+		}
+	}
+	
+	public boolean deleteVacRecord(Integer petID) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query = "DELETE from vaccine_records WHERE PetID = ?";
+		
+		try {
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setInt(1, petID);
+				
+				
+			if (preparedStatement.executeUpdate() == 0) {	
+
+				return false;
+			
+			}
+			else {
+				
+				return true;
+			}
+		
+		
+			
+		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+			return false;
+			
+		}
+		
+		finally {
+			preparedStatement.close();
+			
+		}
+		
+		
+	}
+	
+	
+	public ObservableList<String> getAppointmentList() throws SQLException {
+		
+		  ObservableList<String> appointmentList = FXCollections.observableArrayList();
+
+		    PreparedStatement preparedStatement = null;
+			ResultSet resultSet = null;
+			String query = "SELECT * FROM upcoming_appointments WHERE Status = ? ";
+			
+			try {
+					preparedStatement = connection.prepareStatement(query);
+					preparedStatement.setString(1, "Confirmed");
+					resultSet = preparedStatement.executeQuery();
+					
+					while (resultSet.next()) {
+						
+						appointmentList.add(resultSet.getInt("AppID") + " . " +resultSet.getString("OwnerName") + "'s " + resultSet.getString("PetName") + " " + resultSet.getString("Injection") +
+								" injection " + resultSet.getString("Vaccine") + " on " + resultSet.getString("Date"));
+					}
+					
+				
+			} catch (Exception e) {
+				log.logFile(e, "severe", e.getMessage());
+				e.printStackTrace();
+			}
+			
+			finally {
+				preparedStatement.close();
+				resultSet.close();
+			}
+
+		    return appointmentList;
 	}
 	
 

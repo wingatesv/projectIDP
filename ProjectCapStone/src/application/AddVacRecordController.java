@@ -29,6 +29,8 @@ public class AddVacRecordController implements Initializable {
 	
 	private String petType;
 	private Integer petID;
+	private String petName;
+	private String ownerName;
 	
 	public AddVacRecordModel model = new AddVacRecordModel();
 	public Log log = new Log();
@@ -44,6 +46,17 @@ public class AddVacRecordController implements Initializable {
 		this.petID = petID;
 		
 	}
+	
+	public void setPetName(String petName) {
+		this.petName = petName;
+		
+	}
+	
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+		
+	}
+	
 	
 	public void setPetType(String petType) throws SQLException {
 		this.petType = petType;
@@ -66,6 +79,7 @@ public class AddVacRecordController implements Initializable {
 		}
 	}
 	
+	
 	public void selectInjectionRadioButton(ActionEvent event) {
 		
 		if (radioButton_1st.isSelected() || radioButton_2nd.isSelected()) {
@@ -86,17 +100,21 @@ public class AddVacRecordController implements Initializable {
 		String nextDate = datePicker_nextDate.getValue().toString();
 		String vaccine = comboBox_vacType.getValue();
 		String injection = "";
+		String nextInjection = "";
 		
 		if (radioButton_1st.isSelected()) {
 			injection = radioButton_1st.getText();
+			nextInjection = "2nd";
 		}
 		
 		if (radioButton_2nd.isSelected()) {
 			injection = radioButton_2nd.getText();
+			nextInjection = "3rd & Above";
 		}
 		
 		if (radioButton_3rd.isSelected()) {
 			injection = radioButton_3rd.getText();
+			nextInjection = "3rd & Above";
 		}
 		
 		if (vaccine == null) {
@@ -111,7 +129,6 @@ public class AddVacRecordController implements Initializable {
 			
 			if (model.addVacRecord(petID, date, nextDate, injection, vaccine)) {
 				
-				((Node)event.getSource()).getScene().getWindow().hide();
 				
 				log.logFile(null, "info", "Pet ID : " + petID + " vaccination record is added into database.");
 				
@@ -128,6 +145,27 @@ public class AddVacRecordController implements Initializable {
 				alert.setHeaderText("Vaccination record is not saved.");
 				alert.show();
 			}
+			
+			if (model.addAppointmentInfo(petID, ownerName, petName, nextDate, nextInjection, vaccine)) {
+
+				((Node)event.getSource()).getScene().getWindow().hide();
+				
+				log.logFile(null, "info", ownerName + "'s " + petName + " is scheduled  for " + nextInjection + " injection " + vaccine + " on " + nextDate);
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Program says");
+				alert.setHeaderText("New appointment is scheduled");
+				alert.show();
+			}
+			
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("New appointment is not created.");
+				alert.show();
+			}
+			
+			
 		} catch (SQLException e) {
 			log.logFile(e, "severe", e.getMessage());
 			e.printStackTrace();
