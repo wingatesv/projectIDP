@@ -3,7 +3,10 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.YearMonth;
 import java.util.ResourceBundle;
+
+import common.FullCalendarView;
 import common.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +47,7 @@ public class LoginController implements Initializable {
 	public void login(ActionEvent event) {
 		
 		try {
-			if (loginModel.isLogin(textField_userName.getText(), textField_password.getText())) {
+			if (loginModel.isLogin(textField_userName.getText().trim(), textField_password.getText().trim())) {
 				label_sqlStatus.setText("Credential is valid");
 				log.logFile(null, "info", textField_userName.getText() + " log in successfully.");
 				
@@ -57,6 +60,7 @@ public class LoginController implements Initializable {
 					Pane root = loader.load(getClass().getResource("/fxml/MainInterface.fxml").openStream());
 					MainInterfaceController mainInterfaceController = (MainInterfaceController)loader.getController();
 					mainInterfaceController.getUser(textField_userName.getText());
+					mainInterfaceController.calendarPane.getChildren().add(new FullCalendarView(YearMonth.now()).getView());
 				
 					
 					Scene scene = new Scene(root);

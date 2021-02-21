@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -40,6 +41,7 @@ public class MainInterfaceController implements Initializable {
 	@FXML private Tab myDashBoard;
 	@FXML private Tab petOwner;
 	@FXML private Tab petInfo;
+	@FXML private Tab calender;
 	
 	// Pet Owner Tab
 	@FXML private TextField textField_ownerFirstName;
@@ -67,11 +69,14 @@ public class MainInterfaceController implements Initializable {
 	
 	// Table View for Vaccination Record
 	@FXML private TableView<VaccineRecord> vacRecordTable;
-	@FXML private TableColumn<VaccineRecord, String> vacID;
 	@FXML private TableColumn<VaccineRecord, String> injection;
 	@FXML private TableColumn<VaccineRecord, String> vaccineType;
 	@FXML private TableColumn<VaccineRecord, String> date;
 	@FXML private TableColumn<VaccineRecord, String> nextDate;
+	
+	// Calender Tab
+	@FXML Pane calendarPane;
+	@FXML ListView<String> appointmentListView;
 	
 	
 	// Main Interface Model
@@ -85,8 +90,11 @@ public class MainInterfaceController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		  tabPane.getTabs().remove( petInfo );
 		  tabPane.getTabs().remove( petOwner );
+		  tabPane.getTabs().remove( calender );
 		   
 	}
+	
+/////////////////////////////////////////////// MY DASHBOARD TAB ////////////////////////////////////////////////	
 	
 	// Get current user in My dash board tab
 	
@@ -120,6 +128,25 @@ public class MainInterfaceController implements Initializable {
 		
 	}
 	
+
+	
+// Opens Calender Tab
+	public void goToCalender(ActionEvent event) {
+		
+		 if(!tabPane.getTabs().contains(calender)) {
+			 
+			   tabPane.getTabs().add(calender);  
+			   tabPane.getSelectionModel().select(calender);
+			   appointmentListView.setItems(null);
+			   
+			  }
+		 tabPane.getSelectionModel().select(calender);
+		
+	
+	
+		
+	}
+	
 	// Go to Pet Owner tab in My dash board tab
 	
 	public void petOwner(ActionEvent event) {
@@ -136,11 +163,14 @@ public class MainInterfaceController implements Initializable {
 			   textField_ownerAddress.clear();
 			   
 			  }
+		 tabPane.getSelectionModel().select(petOwner);
 		
 	
 	
 		
 	}
+	
+////////////////////////////////////////////////PET OWNER TAB //////////////////////////////////////////////////	
 	
 	// add new owner info in Pet Owner tab
 	
@@ -494,19 +524,6 @@ public class MainInterfaceController implements Initializable {
 				 label_gender.setText("Gender : " + petList.get(0).getGender());
 				 label_dob.setText("DOB : " + petList.get(0).getDob());
 				 label_neutered.setText("Neutered : " + petList.get(0).getNeutered());
-				 /*
-				 	
-				 Map<String, Object> petInfo = new HashMap<>();
-				 petInfo = model.getPetInfo(OwnerID, petName);
-				 
-				 label_petName.setText("Pet Name : " + petInfo.get("PetName"));
-				 label_breed.setText("Breed : " + petInfo.get("Breed"));
-				 label_petType.setText("Pet Type : " + petInfo.get("PetType"));
-				 label_gender.setText("Gender : " + petInfo.get("Gender"));
-				 label_dob.setText("DOB : " + petInfo.get("DOB"));
-				 
-				 System.out.println(petInfo.get("PetID"));
-	*/
 	
 			}
 			
@@ -519,6 +536,10 @@ public class MainInterfaceController implements Initializable {
 		
 	}
 	
+////////////////////////////////////////////////PET INFO TAB //////////////////////////////////////////////////		
+	
+
+	// Edit pet info
 	public void editPetInfo(ActionEvent event) {
 		if (label_petName.getText().length() < 11 || label_petType.getText().length() < 11 ) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -585,6 +606,106 @@ public class MainInterfaceController implements Initializable {
 		}
 	}
 	
+	// Delete pet info and vaccination record
+	
+	public void deletePetInfo(ActionEvent event) {
+
+		 Alert alertConfirm = new Alert(AlertType.CONFIRMATION);
+		 alertConfirm.setTitle("Program says");
+		 alertConfirm.setHeaderText("Are you sure you want to delete Pet Info?");
+		 alertConfirm.setContentText("This action will erase all data including pet vaccination record.");
+
+        Optional<ButtonType> result = alertConfirm.showAndWait();
+        if (result.get() == ButtonType.OK){
+        	
+        	try {
+        		
+        		if (label_petName.getText().length() < 11 || label_petType.getText().length() < 11 ) {
+        			Alert alert = new Alert(AlertType.ERROR);
+        			alert.setTitle("Program says");
+        			alert.setHeaderText("Pet Record is empty");
+        			alert.show();
+        			return;
+        		}
+        		
+        		
+        		String petType = label_petType.getText().substring(11);
+        		String petName = label_petName.getText().substring(11);
+        		String icNumber = textField_ownerIcNumber.getText().trim();
+        		
+        		if (icNumber.isEmpty()) {
+        			Alert alert = new Alert(AlertType.ERROR);
+        			alert.setTitle("Program says");
+        			alert.setHeaderText("Pet Owner IC is missing.");
+        			alert.show();
+        			return;
+        		}
+        		
+        		
+        			
+        			Integer ownerID = model.getOwnerID(icNumber);
+        			
+        			
+        			if (ownerID == null) {
+        				Alert alert = new Alert(AlertType.ERROR);
+        				alert.setTitle("Program says");
+        				alert.setHeaderText("Pet Owner not found in database");
+        				alert.show();
+        				return;
+        			}
+        			
+        			Integer petID = model.getPetID(ownerID, petName, petType);
+        			
+        			if (petID == null) {
+        				Alert alert = new Alert(AlertType.ERROR);
+        				alert.setTitle("Program says");
+        				alert.setHeaderText("Pet is not registered.");
+        				alert.show();
+        				return;
+        			}
+        			
+        			
+        			if (model.deletePetInfo(petID)) {
+						
+        				Alert alert = new Alert(AlertType.INFORMATION);
+        				alert.setTitle("Program says");
+        				alert.setHeaderText("Pet info is deleted.");
+        				alert.show();
+        				log.logFile(null, "info", "PetID : " + petID + " is deleted into from pets.");
+        				
+					}
+	        			
+	        			else {
+	        				Alert alert = new Alert(AlertType.ERROR);
+	            			alert.setTitle("Program says");
+	            			alert.setHeaderText("Pet info is not deleted.");
+	            			alert.show();
+						}
+        			
+        			if (model.deleteVacRecord(petID)) {
+        				Alert alert = new Alert(AlertType.INFORMATION);
+        				alert.setTitle("Program says");
+        				alert.setHeaderText("Pet info is deleted.");
+        				alert.show();
+        				log.logFile(null, "info", " Vaccination record of PetID : " + petID + " is deleted.");
+        				
+					}
+	        			else {
+	        				Alert alert = new Alert(AlertType.ERROR);
+	            			alert.setTitle("Program says");
+	            			alert.setHeaderText("Vaccination record is not deleted.");
+	            			alert.show();
+						}
+    			      	
+			} catch (Exception e) {
+				log.logFile(e, "severe", e.getMessage());
+				e.printStackTrace();
+			}
+        		
+        }
+		
+	}
+	
 	// Add vaccination Record at Pet Info Tab
 	
 	public void addVaccinationRecord(ActionEvent event) {
@@ -601,6 +722,7 @@ public class MainInterfaceController implements Initializable {
 		String petType = label_petType.getText().substring(11);
 		String petName = label_petName.getText().substring(11);
 		String icNumber = textField_ownerIcNumber.getText().trim();
+		String ownerName = textField_ownerFirstName.getText().trim() + " " + textField_ownerLastName.getText().trim();
 		
 		if (icNumber.isEmpty()) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -641,6 +763,8 @@ public class MainInterfaceController implements Initializable {
 			AddVacRecordController addVacRecordController = (AddVacRecordController)loader.getController();
 			addVacRecordController.setPetType(petType);
 			addVacRecordController.setPetID(petID);
+			addVacRecordController.setPetName(petName);
+			addVacRecordController.setOwnerName(ownerName);
 		
 			
 			Scene scene = new Scene(root);
@@ -714,7 +838,7 @@ public class MainInterfaceController implements Initializable {
 				return;
 			}
 			
-			vacID.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("vacID"));
+			
 			injection.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("Injection"));
 			vaccineType.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("VaccineType"));
 			date.setCellValueFactory(new PropertyValueFactory<VaccineRecord, String>("Date"));
@@ -723,6 +847,73 @@ public class MainInterfaceController implements Initializable {
 			vacRecordTable.setItems(vaccineRecords);
 			
 			
+			
+		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+////////////////////////////////////////////////CALENDER TAB //////////////////////////////////////////////////		
+	
+	// refresh appointment list in calander tab
+	public void refreshAppointmentList(ActionEvent event) {
+		try {
+			 ObservableList<String> appointmentList = model.getAppointmentList();
+			 
+			 if (appointmentList.isEmpty()) {
+				 Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("No record found");
+					alert.show();
+					return;
+			 }
+			 
+			 appointmentListView.setItems(appointmentList);
+			 
+			 
+			 
+			 
+		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	public void goToAppointmentInfo(MouseEvent event) {
+		try {
+			
+				
+			if (event.getClickCount() == 2) {
+				
+				if (!appointmentListView.getSelectionModel().isEmpty()) {
+					Integer appID = Integer.parseInt(appointmentListView.getSelectionModel().getSelectedItem().substring(0, 1));
+					Stage primaryStage = new Stage();
+					FXMLLoader loader = new FXMLLoader();
+					Pane root = loader.load(getClass().getResource("/fxml/AppointmentInfo.fxml").openStream());
+					AppointmentInfoController appointmentInfoController = (AppointmentInfoController)loader.getController();
+					appointmentInfoController.setAppID(appID);
+				
+					
+					Scene scene = new Scene(root);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					primaryStage.setScene(scene);
+					primaryStage.show();
+				}
+				else {
+					 Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Program says");
+						alert.setHeaderText("No record is selected.");
+						alert.show();
+				}
+				
+				
+			}
+				
 			
 		} catch (Exception e) {
 			log.logFile(e, "severe", e.getMessage());

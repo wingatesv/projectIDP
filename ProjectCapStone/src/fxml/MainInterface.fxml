@@ -6,6 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainInterfaceController">
    <children>
@@ -43,7 +44,7 @@
                                           <Insets left="100.0" top="40.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
+                                    <Button mnemonicParsing="false" onAction="#goToCalender" prefHeight="150.0" prefWidth="150.0" text="Calender">
                                        <HBox.margin>
                                           <Insets top="40.0" />
                                        </HBox.margin>
@@ -129,7 +130,7 @@
                         <Label fx:id="label_dob" layoutX="311.0" layoutY="62.0" text="DOB :" />
                         <Label fx:id="label_gender" layoutX="32.0" layoutY="104.0" text="Gender :" />
                         <Button layoutX="584.0" layoutY="16.0" mnemonicParsing="false" onAction="#editPetInfo" text="Edit Info" />
-                        <Button layoutX="695.0" layoutY="16.0" mnemonicParsing="false" text="Delete Info" />
+                        <Button layoutX="695.0" layoutY="16.0" mnemonicParsing="false" onAction="#deletePetInfo" text="Delete Info" />
                         <Separator layoutX="23.0" layoutY="146.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                         <TabPane layoutX="20.0" layoutY="149.0" prefHeight="273.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
                           <tabs>
@@ -139,7 +140,6 @@
                                        <children>
                                           <TableView fx:id="vacRecordTable" layoutX="28.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="281.0" prefWidth="751.0">
                                             <columns>
-                                              <TableColumn fx:id="vacID" prefWidth="75.0" text="Vaccine ID" />
                                               <TableColumn fx:id="injection" prefWidth="131.0" text="Number of Injection" />
                                                 <TableColumn fx:id="vaccineType" prefWidth="133.0" text="Vaccination Type" />
                                                 <TableColumn fx:id="nextDate" prefWidth="148.0" text="Next Appointment Date" />
@@ -161,6 +161,22 @@
                         <Label fx:id="label_neutered" layoutX="312.0" layoutY="96.0" text="Neutered :" />
                      </children></AnchorPane>
               </content>
+            </Tab>
+            <Tab fx:id="calender" text="Calender">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                     <Pane fx:id="calendarPane" layoutX="24.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="10.0" />
+                        <VBox alignment="CENTER" layoutX="649.0" layoutY="20.0" prefHeight="420.0" prefWidth="180.0" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="39.0">
+                           <children>
+                              <Label alignment="CENTER" prefWidth="180.0" text="Upcoming Appointment" />
+                              <ListView fx:id="appointmentListView" onMouseClicked="#goToAppointmentInfo" prefHeight="400.0" prefWidth="180.0" />
+                              <Button mnemonicParsing="false" onAction="#refreshAppointmentList" prefWidth="180.0" text="Refresh" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
         </tabs>
       </TabPane>

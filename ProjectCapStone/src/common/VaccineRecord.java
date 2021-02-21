@@ -5,20 +5,15 @@ import javafx.beans.property.StringProperty;
 
 public class VaccineRecord {
 	
-	public VaccineRecord(String vaccineID, String vaccineType, String injection, String date, String nextDate){
-	      this.vaccineID = new SimpleStringProperty(vaccineID);
+	public VaccineRecord(String vaccineType, String injection, String date, String nextDate){
+	     
 	      this.vaccineType = new SimpleStringProperty(vaccineType);
 	     this.injection = new SimpleStringProperty(injection);
 	     this.date = new SimpleStringProperty(date);
 	     this.nextDate = new SimpleStringProperty(nextDate);
 	  }
 
-	  private StringProperty vaccineID;
-	  public void setVaccineID(String value) { vaccineIDProperty().set(value); }
-	  public String getVaccineID() { return vaccineIDProperty().get(); }
-	  public StringProperty vaccineIDProperty() {
-	    return vaccineID;
-	  }
+
 	  
 	  private StringProperty vaccineType;
 	  public void setVaccineType(String value) { vaccineTypeProperty().set(value); }
