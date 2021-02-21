@@ -31,6 +31,7 @@ public class AddVacRecordController implements Initializable {
 	private Integer petID;
 	private String petName;
 	private String ownerName;
+	private Integer ownerID;
 	
 	public AddVacRecordModel model = new AddVacRecordModel();
 	public Log log = new Log();
@@ -44,6 +45,11 @@ public class AddVacRecordController implements Initializable {
 	
 	public void setPetID(Integer petID) {
 		this.petID = petID;
+		
+	}
+	
+	public void setOwnerID(Integer ownerID) {
+		this.ownerID = ownerID;
 		
 	}
 	
@@ -94,6 +100,14 @@ public class AddVacRecordController implements Initializable {
 	
 	
 	public void saveVacRecord(ActionEvent event) {
+		
+		if (petID == null || ownerID == null || petType == null || petName == null || ownerName == null) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Program says");
+			alert.setHeaderText("Infomation is incomplete");
+			alert.show();
+			return;
+		}
 		
 		
 		String date = datePicker_todayDate.getValue().toString();
@@ -146,7 +160,7 @@ public class AddVacRecordController implements Initializable {
 				alert.show();
 			}
 			
-			if (model.addAppointmentInfo(petID, ownerName, petName, nextDate, nextInjection, vaccine)) {
+			if (model.addAppointmentInfo(ownerID, petID, ownerName, petName, nextDate, nextInjection, vaccine)) {
 
 				((Node)event.getSource()).getScene().getWindow().hide();
 				

@@ -32,10 +32,10 @@ public Log log = new Log();
 		}
 	}
 	
-	public boolean addOwnerInfo(String firstName, String lastName, String icNumber, String pNumber, String address) throws SQLException {
+	public boolean addOwnerInfo(String firstName, String lastName, String icNumber, String pNumber, String address, String email) throws SQLException {
 		
 		PreparedStatement preparedStatement = null;
-		String query = "INSERT into owners (FirstName, LastName, IcNumber, PhoneNumber, Address) values (?, ?, ?, ?, ?)";
+		String query = "INSERT into owners (FirstName, LastName, IcNumber, PhoneNumber, Address, Email) values (?, ?, ?, ?, ?, ?)";
 		
 		try {
 				preparedStatement = connection.prepareStatement(query);
@@ -44,6 +44,7 @@ public Log log = new Log();
 				preparedStatement.setString(3, icNumber);
 				preparedStatement.setString(4, pNumber);
 				preparedStatement.setString(5, address);
+				preparedStatement.setString(6, email);
 				
 				
 			if (preparedStatement.executeUpdate() == 1) {		
@@ -87,7 +88,8 @@ public Log log = new Log();
 			
 			while (resultSet.next()) {
 				
-				owners.add(new Owner(resultSet.getString("FirstName"), resultSet.getString("LastName"), resultSet.getString("IcNumber"), resultSet.getString("PhoneNumber"), resultSet.getString("Address")));
+				owners.add(new Owner(resultSet.getString("FirstName"), resultSet.getString("LastName"), 
+						resultSet.getString("IcNumber"), resultSet.getString("PhoneNumber"), resultSet.getString("Address"), resultSet.getString("Email")));
 			}
 			
 		
@@ -109,10 +111,10 @@ public Log log = new Log();
 	}
 	
 	
-	public boolean editOwnerInfo(String firstName, String lastName, String pNumber, String address, Integer ownerID) throws SQLException {
+	public boolean editOwnerInfo(String firstName, String lastName, String pNumber, String address, String email ,Integer ownerID) throws SQLException {
 		
 		PreparedStatement preparedStatement = null;
-		String query = "UPDATE owners set FirstName = ?, LastName = ?, PhoneNumber = ?, Address = ? WHERE OwnerID = ?";
+		String query = "UPDATE owners set FirstName = ?, LastName = ?, PhoneNumber = ?, Address = ?, Email = ? WHERE OwnerID = ?";
 		
 		try {
 				preparedStatement = connection.prepareStatement(query);
@@ -120,7 +122,9 @@ public Log log = new Log();
 				preparedStatement.setString(2, lastName);
 				preparedStatement.setString(3, pNumber);
 				preparedStatement.setString(4, address);
-				preparedStatement.setInt(5, ownerID);
+				preparedStatement.setString(5, email);
+				preparedStatement.setInt(6, ownerID);
+				
 				
 				
 			if (preparedStatement.executeUpdate() == 1) {		

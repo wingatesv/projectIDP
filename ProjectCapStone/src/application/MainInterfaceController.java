@@ -49,6 +49,7 @@ public class MainInterfaceController implements Initializable {
 	@FXML private TextField textField_ownerPhoneNumber;
 	@FXML private TextField textField_ownerIcNumber;
 	@FXML private TextField textField_ownerAddress;
+	@FXML private TextField textField_ownerEmail;
 	
 	// table view for pets in pet owner tab
 	@FXML private TableView<Pet> petTable;
@@ -181,6 +182,7 @@ public class MainInterfaceController implements Initializable {
 		String pNumber = textField_ownerPhoneNumber.getText().trim();
 		String icNumber = textField_ownerIcNumber.getText().trim();
 		String address = textField_ownerAddress.getText();
+		String email = textField_ownerEmail.getText().trim();
 		
 		
 	
@@ -188,7 +190,7 @@ public class MainInterfaceController implements Initializable {
 		try {
 			
 
-			if (firstName.isEmpty() || lastName.isEmpty() || pNumber.isEmpty() || icNumber.isEmpty() || address.isEmpty()) {
+			if (firstName.isEmpty() || lastName.isEmpty() || pNumber.isEmpty() || icNumber.isEmpty() || address.isEmpty() || email.isEmpty()) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Program says");
 				alert.setHeaderText("Owner info is incomplete.");
@@ -197,7 +199,7 @@ public class MainInterfaceController implements Initializable {
 			}
 			
 			
-			if(model.addOwnerInfo(firstName, lastName, icNumber, pNumber, address))
+			if(model.addOwnerInfo(firstName, lastName, icNumber, pNumber, address, email))
 			{
 				
 
@@ -259,6 +261,7 @@ public class MainInterfaceController implements Initializable {
 			textField_ownerIcNumber.setText(owners.get(0).getICnumber());
 			textField_ownerPhoneNumber.setText(owners.get(0).getTelephoneNumber());
 			textField_ownerAddress.setText(owners.get(0).getAddress());
+			textField_ownerEmail.setText(owners.get(0).getEmail());
 			
 			
 		} catch (Exception e) {
@@ -285,10 +288,11 @@ public class MainInterfaceController implements Initializable {
      		String pNumber = textField_ownerPhoneNumber.getText().trim();
      		String icNumber = textField_ownerIcNumber.getText().trim();
      		String address = textField_ownerAddress.getText();
+     		String	email = textField_ownerEmail.getText().trim();
      		
      		try {
 
-     			if (firstName.isEmpty() || lastName.isEmpty() || pNumber.isEmpty() || icNumber.isEmpty() || address.isEmpty()) {
+     			if (firstName.isEmpty() || lastName.isEmpty() || pNumber.isEmpty() || icNumber.isEmpty() || address.isEmpty() || email.isEmpty()) {
      				Alert alert = new Alert(AlertType.ERROR);
      				alert.setTitle("Program says");
      				alert.setHeaderText("Owner info is incomplete.");
@@ -307,7 +311,7 @@ public class MainInterfaceController implements Initializable {
 					return;
 				}
 				
-				if (model.editOwnerInfo(firstName, lastName, pNumber, address, OwnerID)) {
+				if (model.editOwnerInfo(firstName, lastName, pNumber, address, email, OwnerID)) {
 					
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Program says");
@@ -339,6 +343,7 @@ public class MainInterfaceController implements Initializable {
 		textField_ownerIcNumber.clear();
 		textField_ownerAddress.clear();
 		textField_ownerPhoneNumber.clear();
+		textField_ownerEmail.clear();
 		
 	}
 	
@@ -765,6 +770,7 @@ public class MainInterfaceController implements Initializable {
 			addVacRecordController.setPetID(petID);
 			addVacRecordController.setPetName(petName);
 			addVacRecordController.setOwnerName(ownerName);
+			addVacRecordController.setOwnerID(ownerID);
 		
 			
 			Scene scene = new Scene(root);

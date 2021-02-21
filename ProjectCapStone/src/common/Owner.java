@@ -5,12 +5,13 @@ import javafx.beans.property.StringProperty;
 
 public class Owner {
 	
-	public Owner(String firstName, String lastName, String iCnumber, String telephoneNumber, String address){
+	public Owner(String firstName, String lastName, String iCnumber, String telephoneNumber, String address, String email){
 	     this.firstName = new SimpleStringProperty(firstName);
 	     this.lastName = new SimpleStringProperty(lastName);
 	     this.iCnumber = new SimpleStringProperty(iCnumber);
 	     this.telephoneNumber = new SimpleStringProperty(telephoneNumber);
 	     this.address = new SimpleStringProperty(address);
+	     this.email = new SimpleStringProperty(email);
 	  }
 
 	  private StringProperty firstName;
@@ -47,6 +48,13 @@ public class Owner {
 	  public String getAddress() { return addressProperty().get(); }
 	  public StringProperty addressProperty() {
 	    return address;
+	  }
+	  
+	  private StringProperty email;
+	  public void setEmail(String value) { emailProperty().set(value); }
+	  public String getEmail() { return emailProperty().get(); }
+	  public StringProperty emailProperty() {
+	    return email;
 	  }
 
 }
