@@ -140,20 +140,21 @@ public ObservableList<String> getVaccineCat() throws SQLException {
 		
 	}
 
-public boolean addAppointmentInfo(Integer petID, String ownerName, String petName, String date, String nextInjection, String vaccine) throws SQLException {
+public boolean addAppointmentInfo( Integer ownerID,Integer petID, String ownerName, String petName, String date, String nextInjection, String vaccine) throws SQLException {
 	PreparedStatement preparedStatement = null;
 	
-	String query = "INSERT into upcoming_appointments (Date, OwnerName, PetID, PetName, Injection, Vaccine, Status) values (?, ?, ?, ?, ?, ?, ?)";
+	String query = "INSERT into upcoming_appointments (Date, OwnerID, OwnerName, PetID, PetName, Injection, Vaccine, Status) values (?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, date);
-			preparedStatement.setString(2, ownerName);
-			preparedStatement.setInt(3, petID);
-			preparedStatement.setString(4, petName);
-			preparedStatement.setString(5, nextInjection);
-			preparedStatement.setString(6, vaccine);
-			preparedStatement.setString(7, "Confirmed");
+			preparedStatement.setInt(2, ownerID);
+			preparedStatement.setString(3, ownerName);
+			preparedStatement.setInt(4, petID);
+			preparedStatement.setString(5, petName);
+			preparedStatement.setString(6, nextInjection);
+			preparedStatement.setString(7, vaccine);
+			preparedStatement.setString(8, "Confirmed");
 					
 			
 		if (preparedStatement.executeUpdate() == 1) {		

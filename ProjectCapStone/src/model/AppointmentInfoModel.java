@@ -139,6 +139,72 @@ public boolean editAppointmentDate(Integer appID, String date) throws SQLExcepti
 		
 	}
 }
+
+public Integer getOwnerID(Integer appID) throws SQLException {
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	String query = "SELECT OwnerID FROM upcoming_appointments WHERE AppID = ?";
+	Integer ownerID = null;
+	
+	try {
+		preparedStatement = connection.prepareStatement(query);
+		preparedStatement.setInt(1, appID);
+		resultSet = preparedStatement.executeQuery();
+		
+		while (resultSet.next()) {
+			
+		ownerID = resultSet.getInt("OwnerID");
+			
+		}
+
+
+} catch (Exception e) {
+	log.logFile(e, "severe", e.getMessage());
+	e.printStackTrace();
+
+	
+}
+
+finally {
+	preparedStatement.close();
+	resultSet.close();
+}
+	return ownerID;
+	
+}
+
+public String getOwnerEmail(Integer ownerID) throws SQLException {
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	String query = "SELECT Email FROM owners WHERE OwnerID = ?";
+	String email = "";
+	
+	try {
+		preparedStatement = connection.prepareStatement(query);
+		preparedStatement.setInt(1, ownerID);
+		resultSet = preparedStatement.executeQuery();
+		
+		while (resultSet.next()) {
+			
+		email = resultSet.getString("Email");
+			
+		}
+
+
+} catch (Exception e) {
+	log.logFile(e, "severe", e.getMessage());
+	e.printStackTrace();
+
+	
+}
+
+finally {
+	preparedStatement.close();
+	resultSet.close();
+}
+	return email;
+	
+}
 	
 
 		

@@ -19,7 +19,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#completeAppointment" text="Appointment Completed" />
                   <Button mnemonicParsing="false" onAction="#editAppointmentDate" text="Change Date" />
-                  <Button mnemonicParsing="false" text="Send Reminder" />
+                  <Button mnemonicParsing="false" onAction="#sendReminder" text="Send Reminder" />
                </children>
             </HBox>
          </children>
