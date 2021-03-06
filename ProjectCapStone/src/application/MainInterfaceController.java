@@ -234,20 +234,20 @@ public class MainInterfaceController implements Initializable {
 	// Search for owner name based on Name
 	
 	public void searchOwner(ActionEvent event) {
-		String firstName = textField_ownerFirstName.getText().trim();
-		String lastName = textField_ownerLastName.getText().trim();
+		
+		String icNumber = textField_ownerIcNumber.getText().trim();
 	
 		try {
 			
-			if (firstName.isEmpty() || lastName.isEmpty()) {
+			if (icNumber.isEmpty()) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Program says");
-				alert.setHeaderText("Please key in First Name and Last Name");
+				alert.setHeaderText("Please key in IC Number");
 				alert.show();
 				return;
 			}
 			
-			ObservableList<Owner> owners = model.searchOwner(firstName, lastName);
+			ObservableList<Owner> owners = model.searchOwner(icNumber);
 			if (owners.isEmpty()) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Program says");
@@ -258,7 +258,8 @@ public class MainInterfaceController implements Initializable {
 				return;
 			}
 			
-			textField_ownerIcNumber.setText(owners.get(0).getICnumber());
+			textField_ownerFirstName.setText(owners.get(0).getFirstName());
+			textField_ownerLastName.setText(owners.get(0).getLastName());
 			textField_ownerPhoneNumber.setText(owners.get(0).getTelephoneNumber());
 			textField_ownerAddress.setText(owners.get(0).getAddress());
 			textField_ownerEmail.setText(owners.get(0).getEmail());

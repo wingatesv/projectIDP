@@ -1,8 +1,8 @@
 **************************** CONFIGURATION for CAPSTONE *******************************
 ***************************************************************************************
-SQL Url :jdbc:mysql://localhost:3306/db_idp?autoReconnect=true&useSSL=false
+SQL Url :jdbc:mysql://localhost:3306/db_idp?allowPublicKeyRetrieval=true&useSSL=false
 SQL Username :root
-SQL Password :990213
+SQL Password :wingates990620
 
 
 

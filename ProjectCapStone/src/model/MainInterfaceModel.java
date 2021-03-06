@@ -73,17 +73,17 @@ public Log log = new Log();
 		}
 	}
 	
-	public ObservableList<Owner> searchOwner(String firstName, String lastName) throws SQLException {
+	public ObservableList<Owner> searchOwner(String icNumber) throws SQLException {
 		
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "SELECT * FROM owners WHERE (FirstName = ? AND LastName = ?)";
+		String query = "SELECT * FROM owners WHERE IcNumber = ? ";
 		ObservableList<Owner> owners = FXCollections.observableArrayList();
 		
 		try {
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, firstName);
-			preparedStatement.setString(2, lastName);
+			preparedStatement.setString(1, icNumber);
+			
 			resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next()) {
