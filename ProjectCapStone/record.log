@@ -2937,3 +2937,66 @@ INFO: Voon log in successfully.
 Feb 21, 2021 9:36:35 PM common.Log logFile
 INFO: Reminder email is sent
 
+Mar 03, 2021 10:39:31 PM common.Log logFile
+SEVERE: SQL connection is NULL.
+
+Mar 05, 2021 5:55:05 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 5:55:15 PM common.Log logFile
+INFO: Voon log in successfully.
+
+Mar 05, 2021 5:55:31 PM common.Log logFile
+INFO: Reminder email is sent
+
+Mar 05, 2021 5:56:05 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 5:58:12 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 5:58:37 PM common.Log logFile
+INFO: Voon log in successfully.
+
+Mar 05, 2021 6:00:32 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 9:28:37 PM common.Log logFile
+SEVERE: SQL connection is NULL.
+
+Mar 05, 2021 9:29:12 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 9:29:22 PM common.Log logFile
+INFO: Voon log in successfully.
+
+Mar 05, 2021 9:41:54 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 9:42:30 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 05, 2021 9:45:08 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 10:51:00 AM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 10:58:55 AM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 11:06:02 AM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 11:12:01 AM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 11:12:45 AM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 11:14:27 AM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 11:15:42 AM common.Log logFile
+INFO: Connected to mySQL database
+
