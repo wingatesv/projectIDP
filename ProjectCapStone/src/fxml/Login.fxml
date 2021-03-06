@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import com.jfoenix.controls.*?>
 
-<VBox maxHeight="200.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: #ebeff2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
-      <Label fx:id="label_sqlStatus" alignment="CENTER" prefHeight="20.0" prefWidth="280.0" text="SQL Status :" textAlignment="RIGHT" wrapText="true" />
-      <TextField fx:id="textField_userName" promptText="UserName">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </TextField>
-      <PasswordField fx:id="textField_password" promptText="Password" />
-      <Button mnemonicParsing="false" onAction="#login" prefWidth="280.0" text="LOGIN" />
+      <AnchorPane layoutX="315.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="65.0">
+         <children>
+            <Label fx:id="label_sqlStatus" alignment="TOP_LEFT" layoutX="66.0" layoutY="65.0" prefHeight="21.0" prefWidth="193.0" text="Login" textAlignment="RIGHT" textFill="#707c80" wrapText="true" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
+               <font>
+                  <Font name="SansSerif Regular" size="30.0" />
+               </font></Label>
+            <JFXTextField fx:id="textField_userName" focusColor="#3fd2c7" labelFloat="true" layoutX="55.0" layoutY="156.0" promptText="UserName" unFocusColor="#707c80" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0" />
+            <JFXPasswordField fx:id="textField_password" focusColor="#3fd2c7" labelFloat="true" layoutX="55.0" layoutY="204.0" promptText="Password" unFocusColor="#707c80" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0" />
+            <Button layoutX="55.0" layoutY="364.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="193.0" style="-fx-background-color: #008ebc;" text="LOGIN" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="30.0">
+               <font>
+                  <Font name="SansSerif Bold" size="15.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="50.0" layoutY="50.0" prefHeight="520.0" prefWidth="307.0" style="-fx-background-color: linear-gradient(to right top, #00458b, #006aa9, #008ebc, #00b0c4, #3fd2c7); -fx-background-radius: 1em;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <VBox alignment="CENTER_RIGHT" layoutX="34.0" layoutY="150.0" prefHeight="188.0" prefWidth="240.0" AnchorPane.bottomAnchor="182.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="150.0">
+               <children>
+                  <Label text="#1" textFill="#efeee8">
+                     <font>
+                        <Font name="SansSerif Bold" size="28.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" text="VetNavigate " textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="32.0" />
+                     </font></Label>
+                  <Label text="Management System" textFill="#ffffffcc">
+                     <font>
+                        <Font name="SansSerif Regular" size="16.0" />
+                     </font></Label>
+               </children></VBox>
+         </children>
+      </AnchorPane>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
-</VBox>
+</AnchorPane>
