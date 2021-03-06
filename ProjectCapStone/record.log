@@ -3000,3 +3000,12 @@ INFO: Connected to mySQL database
 Mar 06, 2021 11:15:42 AM common.Log logFile
 INFO: Connected to mySQL database
 
+Mar 06, 2021 1:11:54 PM common.Log logFile
+INFO: Connected to mySQL database
+
+Mar 06, 2021 1:12:01 PM common.Log logFile
+INFO: Voon log in successfully.
+
+Mar 06, 2021 1:12:34 PM common.Log logFile
+INFO: Appointment is completed
+
