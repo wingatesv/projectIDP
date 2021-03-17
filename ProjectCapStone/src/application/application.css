@@ -1,1 +1,19 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button{
+	-fx-background-color: #008ebc;
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 15px;
+}
+.root{
+	-fx-font-family:"SansSerif"
+}
+
+.tab{
+	-fx-background-color:#10699A;
+	-fx-pref-width:200;
+	-fx-pref-height:40;
+}
+
+.tab-hearder-background{
+	-fx-background-color:#10699A;
+}

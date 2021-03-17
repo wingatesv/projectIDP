@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainInterfaceController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #004586;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainInterfaceController">
    <children>
       <MenuBar AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -29,13 +30,13 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane fx:id="tabPane" layoutX="81.0" layoutY="118.0" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-        <tabs>
+      <JFXTabPane fx:id="tabPane" layoutX="81.0" layoutY="118.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: #10699A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <tabs>
           <Tab closable="false" text="My Dashboard">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="198.0" layoutY="74.0" prefHeight="567.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutX="198.0" layoutY="74.0" prefHeight="567.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <HBox prefHeight="220.0" prefWidth="800.0" spacing="80.0">
                                  <children>
@@ -51,7 +52,7 @@
                                     </Button>
                                     <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
                                        <HBox.margin>
-                                          <Insets right="100.0" top="40.0" />
+                                          <Insets right="30.0" top="40.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -85,6 +86,22 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab fx:id="calender" text="Calender">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                     <Pane fx:id="calendarPane" layoutX="24.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="10.0" />
+                        <VBox alignment="CENTER" layoutX="649.0" layoutY="20.0" prefHeight="420.0" prefWidth="180.0" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="39.0">
+                           <children>
+                              <Label alignment="CENTER" prefWidth="180.0" text="Upcoming Appointment" />
+                              <ListView fx:id="appointmentListView" onMouseClicked="#goToAppointmentInfo" prefHeight="400.0" prefWidth="180.0" />
+                              <Button mnemonicParsing="false" onAction="#refreshAppointmentList" prefWidth="180.0" text="Refresh" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
           <Tab fx:id="petOwner" text="Pet Owner">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -164,23 +181,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="calender" text="Calender">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                     <Pane fx:id="calendarPane" layoutX="24.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="10.0" />
-                        <VBox alignment="CENTER" layoutX="649.0" layoutY="20.0" prefHeight="420.0" prefWidth="180.0" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="39.0">
-                           <children>
-                              <Label alignment="CENTER" prefWidth="180.0" text="Upcoming Appointment" />
-                              <ListView fx:id="appointmentListView" onMouseClicked="#goToAppointmentInfo" prefHeight="400.0" prefWidth="180.0" />
-                              <Button mnemonicParsing="false" onAction="#refreshAppointmentList" prefWidth="180.0" text="Refresh" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+         </tabs>
+      </JFXTabPane>
    </children>
 </AnchorPane>
