@@ -8,12 +8,16 @@
 	-fx-font-family:"SansSerif"
 }
 
-.tab{
+.jfx-tab-pane .tab-header-background{
+	-fx-background-color:#10699A;
+	
+}
+
+.jfx-tab-pane .tab .tab-label{
 	-fx-background-color:#10699A;
 	-fx-pref-width:200;
 	-fx-pref-height:40;
-}
-
-.tab-hearder-background{
-	-fx-background-color:#10699A;
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 15px;
+	-fx-alignment: CENTER;
 }
