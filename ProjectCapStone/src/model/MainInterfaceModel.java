@@ -11,6 +11,7 @@ import common.Owner;
 import common.Pet;
 import common.ReadConfig;
 import common.VaccineRecord;
+import common.MedicationRecord;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -333,6 +334,7 @@ public Log log = new Log();
 		    return vaccineRecords;
 	}
 	
+	
 	public boolean deletePetInfo(Integer petID) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		String query = "DELETE from pets WHERE PetID = ?";
@@ -436,6 +438,38 @@ public Log log = new Log();
 			}
 
 		    return appointmentList;
+	}
+
+	public ObservableList<MedicationRecord> getMedicationRecord(Integer petID) throws SQLException {
+		  ObservableList<MedicationRecord> medicationRecords = FXCollections.observableArrayList();
+
+	        PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+		    String query = "SELECT * FROM medication_records WHERE PetID = ? ";
+		 
+		    try {
+		    	    preparedStatement = connection.prepareStatement(query);
+			        preparedStatement.setInt(1, petID);
+			        resultSet = preparedStatement.executeQuery();
+				
+			        while (resultSet.next()) {
+					
+					    medicationRecords.add(new MedicationRecord(resultSet.getString("MedDate") ,resultSet.getString("Time"), resultSet.getString("Medication"), resultSet.getString("Dosage"), resultSet.getString("Frequency"), resultSet.getString("Notes")));
+				    }
+				
+			
+		    } catch (Exception e) {
+		    	log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+		    }
+		
+		    finally {
+		    	preparedStatement.close();
+			    resultSet.close();
+		    }
+
+	    return medicationRecords;
+
 	}
 	
 
