@@ -8,6 +8,7 @@ import common.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import com.jfoenix.controls.JFXTimePicker;
@@ -96,6 +97,8 @@ public class AddMedRecordController implements Initializable {
        
         	
         	if (model.addMedRecord(petID, meddate, time, medication, dosage, frequency, notes)) {
+        		
+        		((Node)event.getSource()).getScene().getWindow().hide();
 				
 				
 				log.logFile(null, "info", "Pet ID : " + petID + " medication record is added into database.");

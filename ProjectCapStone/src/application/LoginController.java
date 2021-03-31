@@ -8,13 +8,13 @@ import java.util.ResourceBundle;
 
 import common.FullCalendarView;
 import common.Log;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,7 +23,7 @@ import model.LoginModel;
 
 public class LoginController implements Initializable {
 	
-	@FXML private Label label_sqlStatus;
+	
 	@FXML private TextField textField_userName;
 	@FXML private TextField textField_password;
 	
@@ -33,12 +33,12 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (loginModel.isDbConnected()) {
-			label_sqlStatus.setText("SQL Status : Connected");
+			
 			log.logFile(null, "info", "Connected to mySQL database");
 		
 		}
 		else {
-			label_sqlStatus.setText("SQL Status : Disconnected");
+			
 			log.logFile(null, "warning", "Not connected to mySQL database");
 		}
 		
@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
 		
 		try {
 			if (loginModel.isLogin(textField_userName.getText().trim(), textField_password.getText().trim())) {
-				label_sqlStatus.setText("Credential is valid");
+				
 				log.logFile(null, "info", textField_userName.getText() + " log in successfully.");
 				
 				
@@ -70,15 +70,15 @@ public class LoginController implements Initializable {
 				
 			}
 			else {
-				label_sqlStatus.setText("Credential is invalid");
-				log.logFile(null, "warning", label_sqlStatus.getText() + " for " + textField_userName.getText());
+				
+				log.logFile(null, "warning", "Credential is invalid for " + textField_userName.getText());
 				textField_userName.clear();
 				textField_password.clear();
 			}
 			
 		} catch (SQLException e) {
 			
-			label_sqlStatus.setText("Connection error.");
+			
 			log.logFile(e, "severe", e.getMessage()  + " for " + textField_userName.getText());
 			textField_userName.clear();
 			textField_password.clear();
@@ -91,6 +91,12 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void close(ActionEvent event)
+	{
+		Platform.exit();
+        System.exit(0);
 	}
 
 }

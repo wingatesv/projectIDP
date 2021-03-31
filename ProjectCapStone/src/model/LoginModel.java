@@ -20,8 +20,8 @@ public class LoginModel {
 	
 		connection = MySqlConnection.Connector(readConfig.getUrl(), readConfig.getUser(), readConfig.getPassword());
 		if (connection == null) {
-			log.logFile(null, "severe", "SQL connection is NULL.");
-			System.exit(1);
+			log.logFile(null, "severe", "VetNavigate unable to connect to SQL");
+			//System.exit(1);
 			
 		}
 	}

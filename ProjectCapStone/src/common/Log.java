@@ -31,7 +31,7 @@ public class Log {
 		                    if(!msg.equals(""))
 		                    {
 		                    	Alert alert = new Alert(AlertType.ERROR);
-		    					alert.setTitle("Program says");
+		    					alert.setTitle("VetNavigate says");
 		    					alert.setHeaderText(msg);
 		    					alert.show();
 		                      
@@ -43,7 +43,7 @@ public class Log {
 		                    if(!msg.equals(""))
 		                    {
 		                    	Alert alert = new Alert(AlertType.WARNING);
-		    					alert.setTitle("Program says");
+		    					alert.setTitle("VetNavigate says");
 		    					alert.setHeaderText(msg);
 		    					alert.show();
 		                    }    

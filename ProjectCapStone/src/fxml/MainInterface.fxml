@@ -77,7 +77,7 @@
                                           </VBox>
                                        </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#petOwner" prefHeight="150.0" prefWidth="150.0">
+                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
                                        <graphic>
                                           <VBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="140.0">
                                              <children>
@@ -98,7 +98,7 @@
                               </HBox>
                               <HBox prefHeight="220.0" prefWidth="800.0" spacing="80.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#petOwner" prefHeight="150.0" prefWidth="150.0">
+                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
                                        <graphic>
                                           <VBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="140.0">
                                              <children>
@@ -115,7 +115,7 @@
                                           <Insets left="80.0" top="30.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#petOwner" prefHeight="150.0" prefWidth="150.0">
+                                    <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
                                        <graphic>
                                           <VBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="140.0">
                                              <children>
@@ -203,6 +203,7 @@
                         <Button layoutX="679.0" layoutY="131.0" mnemonicParsing="false" onAction="#editOwnerInfo" text="Edit Owner Info" />
                         <Label layoutX="352.0" layoutY="72.0" text="Email :" />
                         <TextField fx:id="textField_ownerEmail" layoutX="400.0" layoutY="67.0" promptText="Email Address" />
+                        <Button layoutX="17.0" layoutY="6.0" mnemonicParsing="false" onAction="#closePetOwnerTab" text="Close" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -263,6 +264,7 @@
                           </tabs>
                         </TabPane>
                         <Label fx:id="label_neutered" layoutX="312.0" layoutY="96.0" text="Neutered :" />
+                        <Button layoutX="14.0" layoutY="121.0" mnemonicParsing="false" onAction="#closePetInfoTab" text="Close" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -270,7 +272,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                     <Pane fx:id="calendarPane" layoutX="24.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="10.0" />
+                     <Pane fx:id="calendarPane" layoutX="24.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="60.0" />
                         <VBox alignment="CENTER" layoutX="649.0" layoutY="20.0" prefHeight="420.0" prefWidth="180.0" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="39.0">
                            <children>
                               <Label alignment="CENTER" prefWidth="180.0" text="Upcoming Appointment" />
@@ -278,6 +280,7 @@
                               <Button mnemonicParsing="false" onAction="#refreshAppointmentList" prefWidth="180.0" text="Refresh" />
                            </children>
                         </VBox>
+                        <Button layoutX="43.0" layoutY="26.0" mnemonicParsing="false" onAction="#closeCalenderTab" text="Close" />
                      </children>
                   </AnchorPane>
                </content>

@@ -13,6 +13,8 @@ import common.Pet;
 import common.VaccineRecord;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,7 +33,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.MainInterfaceModel;
 
 public class MainInterfaceController implements Initializable {
@@ -128,6 +132,8 @@ public class MainInterfaceController implements Initializable {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			scene.setFill(Color.TRANSPARENT);
 			primaryStage.show();
 			
 		} catch (Exception e) {
@@ -182,6 +188,17 @@ public class MainInterfaceController implements Initializable {
 	}
 	
 ////////////////////////////////////////////////PET OWNER TAB //////////////////////////////////////////////////	
+	
+	public void closePetOwnerTab(ActionEvent event)
+	{
+		//tabPane.getTabs().remove(petOwner);
+		 EventHandler<Event> handler = petOwner.getOnClosed();
+	        if (null != handler) {
+	            handler.handle(null);
+	        } else {
+	        	petOwner.getTabPane().getTabs().remove(petOwner);
+	        }
+	}
 	
 	// add new owner info in Pet Owner tab
 	
@@ -554,6 +571,17 @@ public class MainInterfaceController implements Initializable {
 	
 ////////////////////////////////////////////////PET INFO TAB //////////////////////////////////////////////////		
 	
+	// close tab
+	public void closePetInfoTab(ActionEvent event)
+	{
+		//tabPane.getTabs().remove(petOwner);
+		 EventHandler<Event> handler = petInfo.getOnClosed();
+	        if (null != handler) {
+	            handler.handle(null);
+	        } else {
+	        	petInfo.getTabPane().getTabs().remove(petInfo);
+	        }
+	}
 
 	// Edit pet info
 	public void editPetInfo(ActionEvent event) {
@@ -1020,6 +1048,18 @@ public class MainInterfaceController implements Initializable {
 	
 	
 ////////////////////////////////////////////////CALENDER TAB //////////////////////////////////////////////////		
+		
+		// close tab
+		public void closeCalenderTab(ActionEvent event)
+		{
+			//tabPane.getTabs().remove(petOwner);
+			 EventHandler<Event> handler = calender.getOnClosed();
+		        if (null != handler) {
+		            handler.handle(null);
+		        } else {
+		        	calender.getTabPane().getTabs().remove(calender);
+		        }
+		}
 	
 	// refresh appointment list in calander tab
 	public void refreshAppointmentList(ActionEvent event) {
