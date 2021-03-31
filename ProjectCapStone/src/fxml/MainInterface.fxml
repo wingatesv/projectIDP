@@ -241,7 +241,25 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                            <Tab text="Medical Record" />
+                            <Tab text="Medical Record">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="medRecordTable" layoutX="36.0" layoutY="27.0" prefHeight="198.0" prefWidth="747.0">
+                                            <columns>
+                                              <TableColumn fx:id="meddate" prefWidth="75.0" text="Date" />
+                                              <TableColumn fx:id="time" prefWidth="75.0" text="Time" />
+                                                <TableColumn fx:id="medication" prefWidth="75.0" text="Medication" />
+                                                <TableColumn fx:id="dosage" prefWidth="75.0" text="Dosage" />
+                                                <TableColumn fx:id="frequency" prefWidth="75.0" text="Frequency" />
+                                                <TableColumn fx:id="notes" prefWidth="75.0" text="Notes" />
+                                            </columns>
+                                          </TableView>
+                                          <Button layoutX="373.0" layoutY="264.0" mnemonicParsing="false" onAction="#addMedicationRecord" text="Add Medication Record" />
+                                          <Button layoutX="706.0" layoutY="264.0" mnemonicParsing="false" onAction="#refreshMedRecordTable" text="Refresh" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content></Tab>
                           </tabs>
                         </TabPane>
                         <Label fx:id="label_neutered" layoutX="312.0" layoutY="96.0" text="Neutered :" />

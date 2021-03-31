@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import common.Log;
+import common.MedicationRecord;
 import common.Owner;
 import common.Pet;
 import common.VaccineRecord;
@@ -74,6 +75,15 @@ public class MainInterfaceController implements Initializable {
 	@FXML private TableColumn<VaccineRecord, String> vaccineType;
 	@FXML private TableColumn<VaccineRecord, String> date;
 	@FXML private TableColumn<VaccineRecord, String> nextDate;
+	
+	// Table View for Medication Record
+	@FXML private TableView<MedicationRecord> medRecordTable;
+	@FXML private TableColumn<MedicationRecord, String> meddate;
+	@FXML private TableColumn<MedicationRecord, String> time;
+	@FXML private TableColumn<MedicationRecord, String> medication;
+	@FXML private TableColumn<MedicationRecord, String> dosage;
+	@FXML private TableColumn<MedicationRecord, String> frequency;
+	@FXML private TableColumn<MedicationRecord, String> notes;
 	
 	// Calender Tab
 	@FXML Pane calendarPane;
@@ -860,6 +870,152 @@ public class MainInterfaceController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	// Add medication Record at Pet Info Tab
+	
+		public void addMedicationRecord(ActionEvent event) {
+				
+			if (label_petName.getText().length() < 11 || label_petType.getText().length() < 11 ) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Pet Record is empty");
+				alert.show();
+				return;
+			}
+				
+				
+				String petType = label_petType.getText().substring(11);
+				String petName = label_petName.getText().substring(11);
+				String icNumber = textField_ownerIcNumber.getText().trim();
+				String ownerName = textField_ownerFirstName.getText().trim() + " " + textField_ownerLastName.getText().trim();
+				
+			if (icNumber.isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Pet Owner IC is missing.");
+				alert.show();
+				return;
+			}
+				
+			try {
+				
+				Integer ownerID = model.getOwnerID(icNumber);
+					
+					
+				if (ownerID == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Pet Owner not found in database");
+					alert.show();
+					return;
+				}
+					
+				Integer petID = model.getPetID(ownerID, petName, petType);
+					
+				if (petID == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Pet is not registered.");
+					alert.show();
+					return;
+				}
+					
+							
+				Stage primaryStage = new Stage();
+				FXMLLoader loader = new FXMLLoader();
+				Pane root = loader.load(getClass().getResource("/fxml/AddMedRecord.fxml").openStream());
+				AddMedRecordController addMedRecordController = (AddMedRecordController)loader.getController();
+				addMedRecordController.setPetID(petID);
+				addMedRecordController.setPetName(petName);
+				addMedRecordController.setOwnerName(ownerName);
+				addMedRecordController.setOwnerID(ownerID);
+				
+					
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch (Exception e) {
+				log.logFile(e, "severe", e.getMessage());
+				e.printStackTrace();
+			}
+				
+		}
+			
+			
+		public void refreshMedRecordTable(ActionEvent event) {
+				
+			if (label_petName.getText().length() < 11) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Pet record is empty");
+				alert.show();
+				return;
+			}
+			
+			String petType = label_petType.getText().substring(11);
+			String petName = label_petName.getText().substring(11);
+			String icNumber = textField_ownerIcNumber.getText().trim();
+				
+			if (icNumber.isEmpty()) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Pet Owner IC is missing.");
+				alert.show();
+				medRecordTable.setItems(null);
+				return;
+			}
+				
+			try {
+					
+				Integer ownerID = model.getOwnerID(icNumber);
+					
+					
+				if (ownerID == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Pet Owner not found in databasel");
+					alert.show();
+					medRecordTable.setItems(null);
+					return;
+				}
+					
+				Integer petID = model.getPetID(ownerID, petName, petType);
+					
+				if (petID == null) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("Pet is not registered.");
+					alert.show();
+					medRecordTable.setItems(null);
+					return;
+				}
+					
+				ObservableList<MedicationRecord> medicationRecords = model.getMedicationRecord(petID);
+					
+				if (medicationRecords.isEmpty()) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Program says");
+					alert.setHeaderText("No Record found.");
+					alert.show();
+					medRecordTable.setItems(null);
+					return;
+				}
+					
+				meddate.setCellValueFactory(new PropertyValueFactory<MedicationRecord, String>("MedDate"));	
+				time.setCellValueFactory(new PropertyValueFactory<MedicationRecord, String>("Time"));
+				medication.setCellValueFactory(new PropertyValueFactory<MedicationRecord, String>("Medication"));
+				dosage.setCellValueFactory(new PropertyValueFactory<MedicationRecord, String>("Dosage"));
+				frequency.setCellValueFactory(new PropertyValueFactory<MedicationRecord, String>("Frequency"));
+				notes.setCellValueFactory(new PropertyValueFactory<MedicationRecord, String>("Notes"));
+					
+				medRecordTable.setItems(medicationRecords);
+					
+			} catch (Exception e) {
+				log.logFile(e, "severe", e.getMessage());
+				e.printStackTrace();
+		    }
+		}
 	
 	
 	
