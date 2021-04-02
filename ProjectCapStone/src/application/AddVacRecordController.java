@@ -131,6 +131,14 @@ public class AddVacRecordController implements Initializable {
 			nextInjection = "3rd & Above";
 		}
 		
+		if (injection.isEmpty()) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Program says");
+			alert.setHeaderText("Vaccination info is incomplete.");
+			alert.show();
+			return;
+		}
+		
 		if (vaccine == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Program says");

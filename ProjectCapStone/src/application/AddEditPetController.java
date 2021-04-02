@@ -47,7 +47,7 @@ public class AddEditPetController {
 
 	public AddEditPetModel model = new AddEditPetModel();
 	public MainInterfaceModel mainModel = new MainInterfaceModel();
-
+	
 	public void setOwnerID(Integer ownerID) {
 		this.ownerID = ownerID;
 		
@@ -241,6 +241,7 @@ public class AddEditPetController {
 					
 					((Node)event.getSource()).getScene().getWindow().hide();
 					
+					
 					log.logFile(null, "info", petName + " the " + petType + " is registered into database.");
 					
 					Alert alert = new Alert(AlertType.INFORMATION);
@@ -264,6 +265,7 @@ public class AddEditPetController {
 					if (model.editPetInfo(petID, petName, petType, breed, gender, dob, neutered)) {
 					
 					((Node)event.getSource()).getScene().getWindow().hide();
+					
 					
 					log.logFile(null, "info", petName + " with PetID : " + petID + " is edited in database.");
 					

@@ -3,6 +3,12 @@
 	-fx-background-color: #008ebc;
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 15px;
+	-fx-background-radius: 20;
+	-fx-font-family:"SansSerif"
+}
+.button:hover{
+	-fx-background-color: #00b0c4;
+	-fx-text-fill: #ffffff;
 }
 .root{
 	-fx-font-family:"SansSerif"
@@ -12,7 +18,7 @@
 	-fx-background-color:#10699A;
 	
 }
-
+ 
 .jfx-tab-pane .tab .tab-label{
 	-fx-background-color:#10699A;
 	-fx-pref-width:200;
@@ -21,3 +27,5 @@
 	-fx-font-size: 15px;
 	-fx-alignment: CENTER;
 }
+
+

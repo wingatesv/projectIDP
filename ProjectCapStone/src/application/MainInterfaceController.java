@@ -48,6 +48,7 @@ public class MainInterfaceController implements Initializable {
 	@FXML private Tab petInfo;
 	@FXML private Tab calender;
 	
+	
 	// Pet Owner Tab
 	@FXML private TextField textField_ownerFirstName;
 	@FXML private TextField textField_ownerLastName;
@@ -106,6 +107,7 @@ public class MainInterfaceController implements Initializable {
 		  tabPane.getTabs().remove( petInfo );
 		  tabPane.getTabs().remove( petOwner );
 		  tabPane.getTabs().remove( calender );
+		  
 		   
 	}
 	
@@ -158,9 +160,8 @@ public class MainInterfaceController implements Initializable {
 			   
 			  }
 		 tabPane.getSelectionModel().select(calender);
+		 refreshAppointmentList(event);
 		
-	
-	
 		
 	}
 	
@@ -178,6 +179,7 @@ public class MainInterfaceController implements Initializable {
 			   textField_ownerIcNumber.clear();
 			   textField_ownerPhoneNumber.clear();
 			   textField_ownerAddress.clear();
+			   textField_ownerEmail.clear();
 			   
 			  }
 		 tabPane.getSelectionModel().select(petOwner);
@@ -222,6 +224,24 @@ public class MainInterfaceController implements Initializable {
 				alert.setTitle("Program says");
 				alert.setHeaderText("Owner info is incomplete.");
 				alert.show();
+				return;
+			}
+			
+			if (icNumber.length() != 12) {  		// validate IC number
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("IC Number is invalid.");
+				alert.show();
+				textField_ownerIcNumber.clear();
+				return;
+			}
+			
+			if (isNumeric(pNumber) == false || pNumber.length() != 10) {				// validate phone number
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("Phone Number is invalid.");
+				alert.show();
+				textField_ownerPhoneNumber.clear();
 				return;
 			}
 			
@@ -290,6 +310,8 @@ public class MainInterfaceController implements Initializable {
 			textField_ownerPhoneNumber.setText(owners.get(0).getTelephoneNumber());
 			textField_ownerAddress.setText(owners.get(0).getAddress());
 			textField_ownerEmail.setText(owners.get(0).getEmail());
+			
+			refreshPetTable(event);		// refresh pet list table
 			
 			
 		} catch (Exception e) {
@@ -557,6 +579,8 @@ public class MainInterfaceController implements Initializable {
 				 label_gender.setText("Gender : " + petList.get(0).getGender());
 				 label_dob.setText("DOB : " + petList.get(0).getDob());
 				 label_neutered.setText("Neutered : " + petList.get(0).getNeutered());
+				 
+				 
 	
 			}
 			
@@ -717,6 +741,14 @@ public class MainInterfaceController implements Initializable {
         				alert.show();
         				log.logFile(null, "info", "PetID : " + petID + " is deleted into from pets.");
         				
+        				 EventHandler<Event> handler = petInfo.getOnClosed();
+        			        if (null != handler) {
+        			            handler.handle(null);
+        			        } else {
+        			        	petInfo.getTabPane().getTabs().remove(petInfo);
+        			        	refreshPetTable(event);
+        			        }
+        				
 					}
 	        			
 	        			else {
@@ -729,15 +761,36 @@ public class MainInterfaceController implements Initializable {
         			if (model.deleteVacRecord(petID)) {
         				Alert alert = new Alert(AlertType.INFORMATION);
         				alert.setTitle("Program says");
-        				alert.setHeaderText("Pet info is deleted.");
+        				alert.setHeaderText("Vaccine record is deleted.");
         				alert.show();
         				log.logFile(null, "info", " Vaccination record of PetID : " + petID + " is deleted.");
+        				
+        				
+        				
         				
 					}
 	        			else {
 	        				Alert alert = new Alert(AlertType.ERROR);
 	            			alert.setTitle("Program says");
 	            			alert.setHeaderText("Vaccination record is not deleted.");
+	            			alert.show();
+						}
+        			
+        			if (model.deleteMedRecord(petID)) {
+        				Alert alert = new Alert(AlertType.INFORMATION);
+        				alert.setTitle("Program says");
+        				alert.setHeaderText("Medical Record is deleted.");
+        				alert.show();
+        				log.logFile(null, "info", " Medical record of PetID : " + petID + " is deleted.");
+        				
+        				
+        				
+        				
+					}
+	        			else {
+	        				Alert alert = new Alert(AlertType.ERROR);
+	            			alert.setTitle("Program says");
+	            			alert.setHeaderText("Medical record is not deleted.");
 	            			alert.show();
 						}
     			      	
@@ -1002,7 +1055,7 @@ public class MainInterfaceController implements Initializable {
 				if (ownerID == null) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Program says");
-					alert.setHeaderText("Pet Owner not found in databasel");
+					alert.setHeaderText("Pet Owner not found in database");
 					alert.show();
 					medRecordTable.setItems(null);
 					return;
@@ -1122,6 +1175,20 @@ public class MainInterfaceController implements Initializable {
 			log.logFile(e, "severe", e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isNumeric(String num)
+	{
+		if (num == null) {
+	        return false;
+	    }
+	    try {
+	        @SuppressWarnings("unused")
+			double d = Double.parseDouble(num);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
 	}
 	
 

@@ -405,6 +405,42 @@ public Log log = new Log();
 		
 	}
 	
+	public boolean deleteMedRecord(Integer petID) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query = "DELETE from medication_records WHERE PetID = ?";
+		
+		try {
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setInt(1, petID);
+				
+				
+			if (preparedStatement.executeUpdate() == 0) {	
+
+				return false;
+			
+			}
+			else {
+				
+				return true;
+			}
+		
+		
+			
+		} catch (Exception e) {
+			log.logFile(e, "severe", e.getMessage());
+			e.printStackTrace();
+			return false;
+			
+		}
+		
+		finally {
+			preparedStatement.close();
+			
+		}
+		
+		
+	}
+	
 	
 	public ObservableList<String> getAppointmentList() throws SQLException {
 		

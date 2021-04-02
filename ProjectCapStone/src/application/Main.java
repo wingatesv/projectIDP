@@ -17,6 +17,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	
 			primaryStage.setScene(scene);
 			//transparent the border
 			primaryStage.initStyle(StageStyle.TRANSPARENT);

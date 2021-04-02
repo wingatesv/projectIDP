@@ -26,7 +26,10 @@
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding></Button>
-            <Button layoutX="204.0" layoutY="14.0" mnemonicParsing="false" onAction="#close" text="Close" />
+            <Button contentDisplay="CENTER" layoutX="231.0" layoutY="14.0" mnemonicParsing="false" onAction="#close" prefHeight="27.0" prefWidth="25.0" style="-fx-background-radius: 50; -fx-background-color: #008ebc;" text="X" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="50.0" layoutY="50.0" prefHeight="520.0" prefWidth="307.0" style="-fx-background-color: linear-gradient(to right top, #00458b, #006aa9, #008ebc, #00b0c4, #3fd2c7); -fx-background-radius: 1em;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
