@@ -6,25 +6,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AppointmentInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AppointmentInfoController">
    <children>
-      <VBox alignment="CENTER" layoutX="181.0" layoutY="69.0" prefHeight="400.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Appointment Info" textFill="#707c80" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="SansSerif Regular" size="17.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="20.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" spacing="15.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
-            <Label text="Appointment Info" />
-            <Label fx:id="label_petOwner" text="Pet Owner :" />
-            <Label fx:id="label_petName" text="Pet Name :" />
-            <Label fx:id="label_vaccination" text="Vaccination :" />
-            <Label fx:id="label_status" text="Status :" />
-            <DatePicker fx:id="datePicker_date" promptText="Appointment Date" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Button fx:id="button_complete" mnemonicParsing="false" onAction="#completeAppointment" text="Appointment Completed" />
-                  <Button fx:id="button_changeDate" mnemonicParsing="false" onAction="#editAppointmentDate" text="Change Date" />
-                  <Button fx:id="button_sendReminder" mnemonicParsing="false" onAction="#sendReminder" text="Send Reminder" />
-               </children>
-            </HBox>
+            <Label fx:id="label_petOwner" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Pet Owner :" textFill="#707c80" />
+            <Label fx:id="label_petName" prefWidth="300.0" text="Pet Name :" textFill="#707c80" />
+            <Label fx:id="label_vaccination" prefWidth="300.0" text="Vaccination :" textFill="#707c80" />
+            <Label fx:id="label_status" prefWidth="300.0" text="Status :" textFill="#707c80" />
          </children>
       </VBox>
+      <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" spacing="20.0" AnchorPane.topAnchor="300.0">
+         <children>
+            <Button fx:id="button_complete" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#completeAppointment" prefWidth="200.0" text="Appointment Completed" />
+            <Button fx:id="button_sendReminder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sendReminder" prefWidth="200.0" text="Send Reminder" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="500.0" spacing="20.0" AnchorPane.topAnchor="250.0">
+         <children>
+            <DatePicker fx:id="datePicker_date" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Appointment Date" style="-fx-background-color: white;" />
+            <Button fx:id="button_changeDate" mnemonicParsing="false" onAction="#editAppointmentDate" prefWidth="200.0" text="Change Date" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
