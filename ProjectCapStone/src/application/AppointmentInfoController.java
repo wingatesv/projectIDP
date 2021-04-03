@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import model.AppointmentInfoModel;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 
 public class AppointmentInfoController {
 	
@@ -25,6 +26,9 @@ public class AppointmentInfoController {
 	@FXML private Label label_vaccination;
 	@FXML private Label label_status;
 	@FXML private DatePicker datePicker_date;
+	@FXML private Button button_changeDate;
+	@FXML private Button button_sendReminder;
+	@FXML private Button button_complete;
 	
 	private Integer appID;
 	
@@ -53,6 +57,13 @@ public class AppointmentInfoController {
 				 label_vaccination.setText("Details : " + appointmentList.get(0).getInjection() + " " + appointmentList.get(0).getVaccine());
 				 label_status.setText("Status : " + appointmentList.get(0).getStatus());
 				 datePicker_date.setValue(LocalDate.parse(appointmentList.get(0).getDate()));
+				 
+				 if (label_status.getText().contains("Completed")) {
+					button_complete.setDisable(true);
+					 button_changeDate.setDisable(true);
+					 button_sendReminder.setDisable(true);
+					 
+				}
 				
 				
 				

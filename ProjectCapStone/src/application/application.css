@@ -21,7 +21,7 @@
  
 .jfx-tab-pane .tab .tab-label{
 	-fx-background-color:#10699A;
-	-fx-pref-width:200;
+	-fx-pref-width:180;
 	-fx-pref-height:40;
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 15px;

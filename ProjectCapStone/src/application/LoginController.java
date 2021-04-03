@@ -65,6 +65,7 @@ public class LoginController implements Initializable {
 					
 					Scene scene = new Scene(root);
 					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					primaryStage.setResizable(false);
 					primaryStage.setScene(scene);
 					primaryStage.show();
 				

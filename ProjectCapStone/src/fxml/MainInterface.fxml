@@ -26,17 +26,17 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Empty" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Empty" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Empty" />
             </items>
           </Menu>
         </menus>
@@ -193,7 +193,7 @@
                                     <Insets bottom="40.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Label fx:id="label_welcomeUser" alignment="BOTTOM_LEFT" text="Welcome :" textFill="#707c80">
+                              <Label fx:id="label_welcomeUser" alignment="BOTTOM_LEFT" text="Current User :" textFill="#707c80">
                                  <font>
                                     <Font name="SansSerif Regular" size="24.0" />
                                  </font>

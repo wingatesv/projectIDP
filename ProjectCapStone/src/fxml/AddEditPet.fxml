@@ -17,7 +17,7 @@
    <children>
       <VBox alignment="CENTER" layoutX="185.0" layoutY="42.0" prefHeight="400.0" prefWidth="500.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="label_petInfo" text="Add New Pet" textAlignment="CENTER" textFill="#707c80">
+            <Label fx:id="label_petInfo" lineSpacing="2.0" text="Add New Pet" textAlignment="CENTER" textFill="#707c80">
                <font>
                   <Font name="SansSerif Regular" size="17.0" />
                </font>
@@ -31,10 +31,7 @@
             </JFXTextField>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="500.0" spacing="20.0">
                <children>
-                  <Label text="Pet Type :" textFill="#707c80">
-                     <font>
-                        <Font name="SansSerif Regular" size="13.0" />
-                     </font></Label>
+                  <Label text="Pet Type :" textFill="#707c80" />
                   <RadioButton fx:id="radioButton_dog" mnemonicParsing="false" onAction="#selectPetTypeRadioButton" text="Dog" textFill="#707c80">
                      <toggleGroup>
                         <ToggleGroup fx:id="petType" />
@@ -67,7 +64,7 @@
                </children>
             </HBox>
             <DatePicker fx:id="datePicker_dob" editable="false" prefWidth="200.0" promptText="Date of Birth" style="-fx-background-color: white; -fx-border-radius: 20;" />
-            <Button mnemonicParsing="false" onAction="#savePetInfo" text="Save">
+            <Button mnemonicParsing="false" onAction="#savePetInfo" prefWidth="100.0" text="Save">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin></Button>

@@ -116,7 +116,7 @@ public class MainInterfaceController implements Initializable {
 	// Get current user in My dash board tab
 	
 	public void getUser(String user) {
-		label_welcomeUser.setText("Welcome : " + user);
+		label_welcomeUser.setText("Current User : " + user);
 	}
 	
 	// Log out current user in My dash board tab
@@ -291,6 +291,15 @@ public class MainInterfaceController implements Initializable {
 				alert.setTitle("Program says");
 				alert.setHeaderText("Please key in IC Number");
 				alert.show();
+				return;
+			}
+			
+			if (icNumber.length() != 12) {  		// validate IC number
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Program says");
+				alert.setHeaderText("IC Number is invalid.");
+				alert.show();
+				textField_ownerIcNumber.clear();
 				return;
 			}
 			
@@ -551,6 +560,7 @@ public class MainInterfaceController implements Initializable {
 					   tabPane.getTabs().add(petInfo);  
 					   tabPane.getSelectionModel().select(petInfo);
 					   vacRecordTable.setItems(null);
+					   medRecordTable.setItems(null);
 					   
 					  }
 				 
