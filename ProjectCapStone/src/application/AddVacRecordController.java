@@ -86,14 +86,14 @@ public class AddVacRecordController implements Initializable {
 	}
 	
 	
-	public void selectInjectionRadioButton(ActionEvent event) {
+	public void selectInjectionRadioButton(ActionEvent event) {     // determine next injection date
 		
-		if (radioButton_1st.isSelected() || radioButton_2nd.isSelected()) {
-			datePicker_nextDate.setValue(LocalDate.now().plusMonths(1));
+		if (radioButton_1st.isSelected() || radioButton_2nd.isSelected()) {		
+			datePicker_nextDate.setValue(LocalDate.now().plusMonths(1));	// plus a month from current date
 		}
 		
 		if (radioButton_3rd.isSelected()) {
-			datePicker_nextDate.setValue(LocalDate.now().plusYears(1));
+			datePicker_nextDate.setValue(LocalDate.now().plusYears(1));		// plus a year from current date
 		}
 		
 	}

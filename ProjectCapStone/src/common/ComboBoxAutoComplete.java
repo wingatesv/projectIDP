@@ -13,13 +13,8 @@ import javafx.stage.Window;
 
 /**
  * 
- * Uses a combobox tooltip as the suggestion for auto complete and updates the
- * combo box itens accordingly <br />
- * It does not work with space, space and escape cause the combobox to hide and
- * clean the filter ... Send me a PR if you want it to work with all characters
- * -> It should be a custom controller - I KNOW!
- * 
- * @author wsiqueir
+ * Uses a combo box tool tip as the suggestion for auto complete and updates the
+ * combo box items accordingly <br />
  *
  * @param <T>
  */
@@ -38,30 +33,30 @@ public class ComboBoxAutoComplete<T> {
 	}
 
 	public void handleOnKeyPressed(KeyEvent e) {
-		ObservableList<T> filteredList = FXCollections.observableArrayList();
-		KeyCode code = e.getCode();
+		ObservableList<T> filteredList = FXCollections.observableArrayList();	// create an observable list
+		KeyCode code = e.getCode();			// get what key is pressed
 
 		if (code.isLetterKey()) {
-			filter += e.getText();
+			filter += e.getText();		// append the keyword into string if the key is a letter
 		}
 		if (code == KeyCode.BACK_SPACE && filter.length() > 0) {
-			filter = filter.substring(0, filter.length() - 1);
+			filter = filter.substring(0, filter.length() - 1);		// delete the keyword accordingly when the user press back space
 			cmb.getItems().setAll(originalItems);
 		}
 		if (code == KeyCode.ESCAPE) {
-			filter = "";
+			filter = "";		// clear all keywords when user press escape 
 		}
 		if (filter.length() == 0) {
-			filteredList = originalItems;
+			filteredList = originalItems;		// show original list when there is no keyword registered
 			cmb.getTooltip().hide();
 		} else {
-			Stream<T> itens = cmb.getItems().stream();
-			String txtUsr = filter.toString().toLowerCase();
-			itens.filter(el -> el.toString().toLowerCase().contains(txtUsr)).forEach(filteredList::add);
-			cmb.getTooltip().setText(txtUsr);
+			Stream<T> itens = cmb.getItems().stream();		// show items in combo box
+			String txtUsr = filter.toString().toLowerCase();	// change all keywords into lower case
+			itens.filter(el -> el.toString().toLowerCase().contains(txtUsr)).forEach(filteredList::add);	// show the items that contain the key words and add more item accordingly
+			cmb.getTooltip().setText(txtUsr);		// set text on the pop up window
 			Window stage = cmb.getScene().getWindow();
-			double posX = stage.getX() + cmb.getBoundsInParent().getMinX();
-			double posY = stage.getY() + cmb.getBoundsInParent().getMinY();
+			double posX = stage.getX() + cmb.getBoundsInParent().getMinX();	// re-adjust the window
+			double posY = stage.getY() + cmb.getBoundsInParent().getMinY(); // re-adjust the window
 			cmb.getTooltip().show(stage, posX, posY);
 			cmb.show();
 		}
